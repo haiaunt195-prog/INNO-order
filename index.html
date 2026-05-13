@@ -1,277 +1,80 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>INNO Internal Order</title>
-
-<style>
-
-body{
-  font-family:Arial;
-  background:#f5f5f5;
-  padding:20px;
+const products = [
+{
+code:"INNO-B001",
+name:"InnoFans Handheld",
+price:200000,
+colors:["Bạc","Đen","Vàng"]
+},
+{
+code:"INNO-015",
+name:"Innoyo Fan Air",
+price:250000,
+colors:["Hồng","Trắng","Tím"]
+},
+{
+code:"INNO-B003",
+name:"InnoFans Ice",
+price:210000,
+colors:["Trắng","Tím","Hồng"]
+},
+{
+code:"INNO-B009",
+name:"InnoFans Ice Pro",
+price:270000,
+colors:["Xám","Vàng","Đen"]
+},
+{
+code:"INNO-B008",
+name:"Innoyo Water Flosser",
+price:470000,
+colors:["Hồng","Xanh"]
+},
+{
+code:"INNO-B007",
+name:"InnoCare Water Flosser Pocket",
+price:500000,
+colors:["Trắng"]
+},
+{
+code:"INNO-A004",
+name:"Sạc dự phòng Power Wired 10000mAh",
+price:250000,
+colors:["Trắng","Tím","Xanh"]
+},
+{
+code:"INNO-C001",
+name:"Máy rửa xe cầm tay InnoCare Cordless Washer Gun",
+price:599000,
+colors:["Standard"]
+},
+{
+code:"P-PG-005",
+name:"Tay cầm chụp ảnh",
+price:600000,
+colors:["Standard"]
+},
+{
+code:"P-PG-012",
+name:"Đèn trợ sáng điện thoại PGYTECH",
+price:270000,
+colors:["Standard"]
+},
+{
+code:"INNO-B012",
+name:"Máy Sấy Tóc Innoyo Plasma Lite",
+price:660000,
+colors:["Hồng","Trắng"]
+},
+{
+code:"INNO-B014",
+name:"Máy Sấy Tóc Innoyo Plasma",
+price:900000,
+colors:["Hồng","Tím","Trắng"]
+},
+{
+code:"INNO-B013",
+name:"Máy sấy tóc INNOYO Plasma AI",
+price:1380000,
+colors:["Gold"]
 }
-
-.container{
-  max-width:700px;
-  margin:auto;
-  background:white;
-  padding:20px;
-  border-radius:20px;
-}
-
-.product{
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:20px;
-  margin-bottom:20px;
-}
-
-.qty{
-  width:100px;
-  padding:10px;
-}
-
-.total{
-  font-size:30px;
-  font-weight:bold;
-  margin-top:30px;
-}
-
-button{
-  width:100%;
-  padding:15px;
-  background:black;
-  color:white;
-  border:none;
-  border-radius:12px;
-  font-size:18px;
-}
-
-input{
-  width:100%;
-  padding:10px;
-  margin-bottom:15px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-<h1>
-INNO Thanh lý nội bộ
-</h1>
-
-<input
-id="employeeName"
-placeholder="Tên nhân viên">
-
-<input
-id="company"
-placeholder="Công ty">
-
-<input
-id="phone"
-placeholder="Số điện thoại">
-
-<div class="product">
-
-<h3>
-InnoFans Handheld
-</h3>
-
-<p>B010 - 209,400đ</p>
-
-White
-<input
-class="qty"
-type="number"
-id="B010_White"
-value="0">
-
-Pink
-<input
-class="qty"
-type="number"
-id="B010_Pink"
-value="0">
-
-Black
-<input
-class="qty"
-type="number"
-id="B010_Black"
-value="0">
-
-</div>
-
-<div class="product">
-
-<h3>
-Innoyo Fan Air
-</h3>
-
-<p>B015 - 239,400đ</p>
-
-White
-<input
-class="qty"
-type="number"
-id="B015_White"
-value="0">
-
-Pink
-<input
-class="qty"
-type="number"
-id="B015_Pink"
-value="0">
-
-Black
-<input
-class="qty"
-type="number"
-id="B015_Black"
-value="0">
-
-</div>
-
-<div class="total">
-
-Tổng tiền:
-<span id="total">
-0
-</span>
-VNĐ
-
-</div>
-
-<br>
-
-<h3>
-QR Thanh toán
-</h3>
-
-<img
-id="qr"
-width="250">
-
-<br><br>
-
-<input
-id="paymentProof"
-placeholder="Link bill Google Drive">
-
-<button onclick="submitOrder()">
-Submit Order
-</button>
-
-</div>
-
-<script>
-
-const prices = {
-
-  B010_White:209400,
-  B010_Pink:209400,
-  B010_Black:209400,
-
-  B015_White:239400,
-  B015_Pink:239400,
-  B015_Black:239400
-
-};
-
-function calculateTotal(){
-
-  let total = 0;
-
-  Object.keys(prices)
-  .forEach(id=>{
-
-    const qty =
-      Number(
-        document.getElementById(id).value
-      );
-
-    total += qty * prices[id];
-
-  });
-
-  document
-    .getElementById("total")
-    .innerText =
-    total.toLocaleString();
-
-  document
-    .getElementById("qr")
-    .src =
-
-`https://img.vietqr.io/image/970422-123456789-compact2.png?amount=${total}&addInfo=INNO`;
-
-}
-
-document
-.querySelectorAll(".qty")
-.forEach(input=>{
-
-  input.addEventListener(
-    "input",
-    calculateTotal
-  );
-
-});
-
-calculateTotal();
-
-async function submitOrder(){
-
-  const payload = {
-
-    employeeName:
-      document.getElementById("employeeName").value,
-
-    company:
-      document.getElementById("company").value,
-
-    phone:
-      document.getElementById("phone").value,
-
-    paymentProof:
-      document.getElementById("paymentProof").value,
-
-    total:
-      document.getElementById("total").innerText
-
-  };
-
-  Object.keys(prices)
-  .forEach(id=>{
-
-    payload[id] =
-      document.getElementById(id).value;
-
-  });
-
-  await fetch(
-    "https://script.google.com/macros/s/AKfycbz0HeVbyzDNWWMI4FnbjV--LSq3G-KqH6Og02gqzHS6cXSCqy2oHlr4458qsdElr4M0mg/exec",
-    {
-      method:"POST",
-      body: JSON.stringify(payload)
-    }
-  );
-
-  alert("Order submitted!");
-
-}
-</script>
-
-</body>
-</html>
+];
