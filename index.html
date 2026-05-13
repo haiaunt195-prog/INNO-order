@@ -6,7 +6,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>INNO ƯU ĐÃI NỘI BỘ </title>
+<title>INNO ƯU ĐÃI NỘI BỘ</title>
 
 <style>
 
@@ -84,9 +84,6 @@ color:red;
 
 display:flex;
 align-items:center;
-justify-content:space-between;
-
-gap:20px;
 
 padding:16px 20px;
 margin-bottom:14px;
@@ -101,20 +98,6 @@ transition:0.2s ease;
 
 .product-checkbox:hover{
 background:#f5f5f5;
-}
-
-.product-checkbox label{
-
-flex:1;
-
-font-size:15px;
-font-weight:500;
-
-line-height:1.5;
-
-cursor:pointer;
-
-margin:0;
 }
 
 .product-checkbox input[type="checkbox"]{
@@ -179,7 +162,7 @@ margin-bottom:50px;
 
 .qr-image{
 
-width:420px;
+width:520px;
 max-width:100%;
 
 border-radius:24px;
@@ -266,7 +249,7 @@ class="logo"
 alt="INNO Logo"
 />
 
-<h1>ƯU ĐÃI NỘI BỘ</h1>
+<h1>INNO ƯU ĐÃI NỘI BỘ</h1>
 
 </div>
 
@@ -290,7 +273,6 @@ Email của bạn (mail dùng tại công ty)
 <input
 type="email"
 id="email"
-required
 placeholder="example@company.com"
 />
 
@@ -308,7 +290,8 @@ Số điện thoại liên hệ
 <input id="phone"/>
 
 <label>
-Note 
+Note <span class="required">*</span>
+</label>
 
 <textarea id="note"></textarea>
 
@@ -485,16 +468,41 @@ checkbox.className =
 
 checkbox.innerHTML = `
 
-<label for="check-${index}">
-${p.code} - ${p.name}
-(${p.price.toLocaleString()}đ)
-</label>
+<div style="
+display:flex;
+align-items:center;
+gap:14px;
+width:100%;
+">
 
 <input
 type="checkbox"
 id="check-${index}"
 onchange="toggleProduct(${index})"
 />
+
+<label
+for="check-${index}"
+style="
+margin:0;
+cursor:pointer;
+line-height:1.5;
+"
+>
+
+<b>${p.code}</b>
+- ${p.name}
+
+<span style="
+color:#666;
+font-weight:400;
+">
+(${p.price.toLocaleString()}đ)
+</span>
+
+</label>
+
+</div>
 
 `;
 
@@ -522,7 +530,9 @@ colorsHTML += `
 <input
 type="number"
 min="0"
-value="0"
+placeholder="Nhập số lượng"
+value=""
+disabled
 id="${p.code}_${color}"
 oninput="calculateTotal()"
 />
@@ -556,12 +566,37 @@ productBlocks.appendChild(block);
 function toggleProduct(index){
 
 const checked =
-document.getElementById(`check-${index}`).checked;
+document.getElementById(
+`check-${index}`
+).checked;
 
+const block =
 document.getElementById(
 `product-${index}`
-).style.display =
+);
+
+block.style.display =
 checked ? "block" : "none";
+
+const product =
+products[index];
+
+product.colors.forEach(color=>{
+
+const input =
+document.getElementById(
+`${product.code}_${color}`
+);
+
+input.disabled = !checked;
+
+if(!checked){
+
+input.value = "";
+
+}
+
+});
 
 calculateTotal();
 
@@ -739,26 +774,33 @@ const items = [];
 products.forEach((p,index)=>{
 
 const checked =
-document.getElementById(`check-${index}`).checked;
+document.getElementById(
+`check-${index}`
+).checked;
 
-if(checked){
+if(!checked) return;
+
+let hasQty = false;
 
 p.colors.forEach(color=>{
 
-const qty =
-parseInt(
+const input =
 document.getElementById(
 `${p.code}_${color}`
-).value || 0
 );
 
+const qty =
+parseInt(input.value || 0);
+
 if(qty > 0){
+
+hasQty = true;
 
 items.push({
 
 product:p.name,
-color:color,
-qty:qty,
+color,
+qty,
 price:p.price,
 total:qty * p.price
 
@@ -767,6 +809,12 @@ total:qty * p.price
 }
 
 });
+
+if(!hasQty){
+
+throw new Error(
+`Vui lòng nhập số lượng cho ${p.name}`
+);
 
 }
 
@@ -843,7 +891,9 @@ location.reload();
 
 console.error(error);
 
-alert("Có lỗi xảy ra");
+alert(
+error.message || "Có lỗi xảy ra"
+);
 
 button.disabled = false;
 
