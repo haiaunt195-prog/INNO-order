@@ -6,136 +6,246 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>INNO Thanh lý nội bộ</title>
+<title>INNO Ưu đãi nội bộ</title>
 
 <style>
+
+*{
+box-sizing:border-box;
+}
 
 body{
 font-family:Arial,sans-serif;
 background:#f3f3f3;
 padding:20px;
 margin:0;
+color:#111;
 }
 
 .container{
-max-width:900px;
+max-width:950px;
 margin:auto;
 background:white;
-padding:24px;
-border-radius:16px;
-box-shadow:0 2px 10px rgba(0,0,0,0.08);
+padding:32px;
+border-radius:24px;
+box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+
+.header{
+text-align:center;
+margin-bottom:40px;
+}
+
+.logo{
+width:180px;
+max-width:100%;
+object-fit:contain;
+margin-bottom:18px;
 }
 
 h1{
-margin-bottom:24px;
-font-size:36px;
+font-size:42px;
+margin:0;
+font-weight:700;
 }
 
 h2{
-margin-top:30px;
+margin-top:40px;
+margin-bottom:20px;
+font-size:28px;
+}
+
+label{
+display:block;
+font-weight:600;
+margin-bottom:8px;
 }
 
 input,
 textarea{
 width:100%;
-padding:12px;
-margin-top:8px;
-margin-bottom:16px;
-border:1px solid #ccc;
-border-radius:8px;
-box-sizing:border-box;
+padding:14px;
+border:1px solid #dcdcdc;
+border-radius:12px;
 font-size:16px;
+margin-bottom:20px;
 }
 
 textarea{
-min-height:100px;
+min-height:120px;
 resize:vertical;
-}
-
-.product-checkbox{
-margin-bottom:10px;
-font-size:16px;
-}
-
-.product-block{
-border:1px solid #ddd;
-padding:20px;
-border-radius:12px;
-margin-top:20px;
-display:none;
-background:#fafafa;
-}
-
-.product-title{
-font-size:22px;
-font-weight:bold;
-margin-bottom:8px;
-}
-
-.product-price{
-font-size:18px;
-margin-bottom:16px;
-}
-
-.color-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-gap:16px;
-}
-
-.total{
-font-size:36px;
-font-weight:bold;
-margin-top:40px;
-text-align:center;
-}
-
-button{
-background:black;
-color:white;
-padding:16px;
-border:none;
-border-radius:12px;
-cursor:pointer;
-font-size:18px;
-width:100%;
-margin-top:30px;
-}
-
-button:hover{
-opacity:0.9;
-}
-
-.qr{
-margin-top:40px;
-text-align:center;
-}
-
-.qr img{
-width:100%;
-max-width:320px;
-border-radius:12px;
-}
-
-.note{
-font-size:14px;
-color:#666;
-margin-top:8px;
-line-height:1.6;
 }
 
 .required{
 color:red;
 }
 
-@media(max-width:768px){
+.product-checkbox{
 
-h1{
-font-size:28px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+gap:20px;
+
+padding:16px 20px;
+margin-bottom:14px;
+
+border-radius:14px;
+border:1px solid #e2e2e2;
+
+background:#fafafa;
+
+transition:0.2s ease;
+}
+
+.product-checkbox:hover{
+background:#f5f5f5;
+}
+
+.product-checkbox label{
+
+flex:1;
+
+font-size:15px;
+font-weight:500;
+
+line-height:1.5;
+
+cursor:pointer;
+
+margin:0;
+}
+
+.product-checkbox input[type="checkbox"]{
+
+width:22px;
+height:22px;
+
+cursor:pointer;
+
+flex-shrink:0;
+}
+
+.product-block{
+
+border:1px solid #e3e3e3;
+padding:24px;
+border-radius:18px;
+margin-top:18px;
+
+display:none;
+
+background:#fafafa;
+}
+
+.product-title{
+font-size:24px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.product-price{
+font-size:18px;
+margin-bottom:20px;
+color:#444;
+}
+
+.color-grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+gap:20px;
 }
 
 .total{
-font-size:28px;
+
+font-size:42px;
+font-weight:bold;
+
+margin-top:50px;
+
+text-align:center;
+}
+
+.qr-section{
+
+text-align:center;
+
+margin-top:50px;
+margin-bottom:50px;
+}
+
+.qr-image{
+
+width:420px;
+max-width:100%;
+
+border-radius:24px;
+
+box-shadow:
+0 8px 30px rgba(0,0,0,0.12);
+}
+
+.note{
+font-size:14px;
+color:#666;
+line-height:1.7;
+margin-top:14px;
+}
+
+button{
+
+background:black;
+color:white;
+
+padding:18px;
+
+border:none;
+border-radius:14px;
+
+font-size:18px;
+font-weight:bold;
+
+cursor:pointer;
+
+width:100%;
+
+margin-top:30px;
+
+transition:0.2s;
+}
+
+button:hover{
+opacity:0.92;
+}
+
+button:disabled{
+opacity:0.7;
+cursor:not-allowed;
+}
+
+@media(max-width:768px){
+
+.container{
+padding:22px;
+}
+
+h1{
+font-size:32px;
+}
+
+h2{
+font-size:24px;
+}
+
+.total{
+font-size:32px;
+}
+
+.logo{
+width:140px;
 }
 
 }
@@ -148,7 +258,17 @@ font-size:28px;
 
 <div class="container">
 
-<h1>INNO Thanh lý nội bộ</h1>
+<div class="header">
+
+<img
+src="https://raw.githubusercontent.com/haiaunt195-prog/INNO-order/main/logo-inno-black.png"
+class="logo"
+alt="INNO Logo"
+/>
+
+<h1>INNO Ưu đãi nội bộ</h1>
+
+</div>
 
 <label>
 Họ và tên <span class="required">*</span>
@@ -163,24 +283,39 @@ Công ty <span class="required">*</span>
 <input id="company"/>
 
 <label>
+Email của bạn (mail dùng tại công ty)
+<span class="required">*</span>
+</label>
+
+<input
+type="email"
+id="email"
+required
+placeholder="example@company.com"
+/>
+
+<label>
 Mã NV <span class="required">*</span>
 </label>
 
 <input id="employeeCode"/>
 
 <label>
-Số điện thoại liên hệ <span class="required">*</span>
+Số điện thoại liên hệ
+<span class="required">*</span>
 </label>
 
 <input id="phone"/>
 
 <label>
-Note 
+Note <span class="required">*</span>
+</label>
 
 <textarea id="note"></textarea>
 
 <h2>
-Sản phẩm muốn mua <span class="required">*</span>
+Sản phẩm muốn mua
+<span class="required">*</span>
 </h2>
 
 <div id="product-list"></div>
@@ -188,24 +323,35 @@ Sản phẩm muốn mua <span class="required">*</span>
 <div id="product-blocks"></div>
 
 <div class="total">
+
 Tổng tiền:
 <span id="total">0</span> VNĐ
+
 </div>
 
-<div class="qr">
+<div class="qr-section">
 
 <h2>QR Thanh toán</h2>
 
-<img src="./a93db73a6b1d45faa4785ad8c31b863f.png"/>
+<img
+src="./a93db73a6b1d45faa4785ad8c31b863f.png"
+class="qr-image"
+/>
 
 <p class="note">
-Vui lòng chuyển đúng số tiền và upload bill chuyển khoản bên dưới.
+
+Vui lòng chuyển đúng số tiền
+và upload bill chuyển khoản bên dưới.
+
 </p>
 
 </div>
 
 <h2>
-Upload bill chuyển khoản <span class="required">*</span>
+
+Upload bill chuyển khoản
+<span class="required">*</span>
+
 </h2>
 
 <input
@@ -340,18 +486,16 @@ checkbox.className =
 
 checkbox.innerHTML = `
 
-<label>
+<label for="check-${index}">
+${p.code} - ${p.name}
+(${p.price.toLocaleString()}đ)
+</label>
 
 <input
 type="checkbox"
 id="check-${index}"
 onchange="toggleProduct(${index})"
 />
-
-${p.code} - ${p.name}
-(${p.price.toLocaleString()}đ)
-
-</label>
 
 `;
 
@@ -564,6 +708,9 @@ document.getElementById("name").value.trim();
 const company =
 document.getElementById("company").value.trim();
 
+const email =
+document.getElementById("email").value.trim();
+
 const employeeCode =
 document.getElementById("employeeCode").value.trim();
 
@@ -576,6 +723,7 @@ document.getElementById("note").value.trim();
 if(
 !fullName ||
 !company ||
+!email ||
 !employeeCode ||
 !phone ||
 !note
@@ -612,7 +760,8 @@ items.push({
 product:p.name,
 color:color,
 qty:qty,
-price:p.price
+price:p.price,
+total:qty * p.price
 
 });
 
@@ -660,6 +809,7 @@ const payload = {
 
 fullName,
 company,
+email,
 employeeCode,
 phone,
 note,
