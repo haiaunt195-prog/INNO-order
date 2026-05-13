@@ -2,8 +2,9 @@
 <html lang="vi">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>INNO ƯU ĐÃI NỘI BỘ</title>
 
@@ -11,215 +12,223 @@
 
 *{
 box-sizing:border-box;
-font-family:Arial,sans-serif;
 }
 
 body{
-margin:0;
+font-family:Arial,sans-serif;
+background:#f3f3f3;
 padding:20px;
-background:#f5f5f5;
+margin:0;
 color:#111;
 }
 
 .container{
-max-width:900px;
+max-width:950px;
 margin:auto;
-background:#fff;
-padding:40px;
-border-radius:20px;
-box-shadow:0 2px 15px rgba(0,0,0,.08);
+background:white;
+padding:32px;
+border-radius:24px;
+box-shadow:0 8px 30px rgba(0,0,0,0.08);
 }
 
-.logo-wrap{
+.header{
 text-align:center;
-margin-bottom:10px;
+margin-bottom:40px;
 }
 
-.logo-wrap img{
-height:140px;
+.logo{
+width:180px;
+max-width:100%;
 object-fit:contain;
+margin-bottom:18px;
 }
 
 h1{
-text-align:center;
-font-size:46px;
-margin-top:10px;
-margin-bottom:40px;
-font-weight:800;
+font-size:42px;
+margin:0;
+font-weight:700;
+}
+
+h2{
+margin-top:40px;
+margin-bottom:20px;
+font-size:28px;
 }
 
 label{
 display:block;
-margin-top:22px;
+font-weight:600;
 margin-bottom:8px;
-font-weight:700;
-font-size:15px;
+}
+
+input,
+textarea{
+width:100%;
+padding:14px;
+border:1px solid #dcdcdc;
+border-radius:12px;
+font-size:16px;
+margin-bottom:20px;
+}
+
+textarea{
+min-height:120px;
+resize:vertical;
 }
 
 .required{
 color:red;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea{
-width:100%;
-padding:14px;
-border:1px solid #ccc;
-border-radius:12px;
-font-size:16px;
+.product-checkbox{
+
+display:flex;
+align-items:center;
+
+padding:16px 20px;
+margin-bottom:14px;
+
+border-radius:14px;
+border:1px solid #e2e2e2;
+
+background:#fafafa;
+
+transition:0.2s ease;
 }
 
-textarea{
-min-height:100px;
-resize:vertical;
+.product-checkbox:hover{
+background:#f5f5f5;
 }
 
-.products{
-margin-top:20px;
+.product-checkbox input[type="checkbox"]{
+
+width:22px;
+height:22px;
+
+cursor:pointer;
+
+flex-shrink:0;
 }
 
-.product-card{
+.product-block{
+
 border:1px solid #e3e3e3;
+padding:24px;
 border-radius:18px;
-padding:22px;
-margin-bottom:20px;
+margin-top:18px;
+
+display:none;
+
 background:#fafafa;
 }
 
-.product-header{
-display:flex;
-align-items:flex-start;
-gap:14px;
-}
-
-.product-checkbox{
-margin-top:6px;
-transform:scale(1.3);
-}
-
-.product-info{
-flex:1;
-}
-
 .product-title{
-font-size:22px;
-font-weight:700;
-line-height:1.4;
+font-size:24px;
+font-weight:bold;
+margin-bottom:10px;
 }
 
 .product-price{
-margin-top:6px;
 font-size:18px;
+margin-bottom:20px;
 color:#444;
-font-weight:600;
-}
-
-.hidden{
-display:none;
 }
 
 .color-grid{
+
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:18px;
-margin-top:20px;
-}
 
-.color-item{
-display:flex;
-flex-direction:column;
-gap:8px;
-}
-
-.color-item span{
-font-size:15px;
-font-weight:700;
-}
-
-.color-item input{
-padding:12px;
-border:1px solid #ccc;
-border-radius:12px;
-font-size:15px;
+gap:20px;
 }
 
 .total{
-text-align:center;
-font-size:56px;
-font-weight:800;
+
+font-size:42px;
+font-weight:bold;
+
 margin-top:50px;
+
+text-align:center;
 }
 
-.qr-title{
+.qr-section{
+
 text-align:center;
-font-size:32px;
-font-weight:800;
+
 margin-top:50px;
-margin-bottom:25px;
+margin-bottom:50px;
 }
 
-.qr-box{
-text-align:center;
-}
+.qr-image{
 
-.qr-box img{
-width:500px;
+width:520px;
 max-width:100%;
+
 border-radius:24px;
-box-shadow:0 2px 15px rgba(0,0,0,.08);
+
+box-shadow:
+0 8px 30px rgba(0,0,0,0.12);
 }
 
-.qr-note{
-text-align:center;
-margin-top:20px;
-font-size:16px;
-color:#555;
-}
-
-.file-upload{
-margin-top:20px;
+.note{
+font-size:14px;
+color:#666;
+line-height:1.7;
+margin-top:14px;
 }
 
 button{
-width:100%;
-margin-top:35px;
+
+background:black;
+color:white;
+
 padding:18px;
+
 border:none;
 border-radius:14px;
-background:#000;
-color:#fff;
-font-size:20px;
-font-weight:700;
+
+font-size:18px;
+font-weight:bold;
+
 cursor:pointer;
-transition:.2s;
+
+width:100%;
+
+margin-top:30px;
+
+transition:0.2s;
 }
 
 button:hover{
-opacity:.9;
+opacity:0.92;
+}
+
+button:disabled{
+opacity:0.7;
+cursor:not-allowed;
 }
 
 @media(max-width:768px){
 
 .container{
-padding:24px;
+padding:22px;
 }
 
 h1{
-font-size:34px;
+font-size:32px;
+}
+
+h2{
+font-size:24px;
 }
 
 .total{
-font-size:40px;
+font-size:32px;
 }
 
-.qr-title{
-font-size:26px;
-}
-
-.product-title{
-font-size:18px;
+.logo{
+width:140px;
 }
 
 }
@@ -232,95 +241,121 @@ font-size:18px;
 
 <div class="container">
 
-<div class="logo-wrap">
+<div class="header">
+
 <img
 src="https://raw.githubusercontent.com/haiaunt195-prog/INNO-order/main/logo-inno-black.png"
+class="logo"
 alt="INNO Logo"
 />
+
+<h1>INNO ƯU ĐÃI NỘI BỘ</h1>
+
 </div>
-
-<h1>ƯU ĐÃI NỘI BỘ</h1>
-
-<form id="orderForm">
 
 <label>
 Họ và tên <span class="required">*</span>
 </label>
-<input required type="text" id="fullName">
 
-<label>
-Email của bạn (mail dùng tại công ty) <span class="required">*</span>
-</label>
-<input required type="email" id="email">
+<input id="name"/>
 
 <label>
 Công ty <span class="required">*</span>
 </label>
-<input required type="text" id="company">
+
+<input id="company"/>
+
+<label>
+Email của bạn (mail dùng tại công ty)
+<span class="required">*</span>
+</label>
+
+<input
+type="email"
+id="email"
+placeholder="example@company.com"
+/>
 
 <label>
 Mã NV <span class="required">*</span>
 </label>
-<input required type="text" id="employeeCode">
+
+<input id="employeeCode"/>
 
 <label>
-Số điện thoại liên hệ <span class="required">*</span>
+Số điện thoại liên hệ
+<span class="required">*</span>
 </label>
-<input required type="tel" id="phone">
+
+<input id="phone"/>
 
 <label>
 Note <span class="required">*</span>
 </label>
-<textarea required id="note"></textarea>
 
-<label>
-Sản phẩm muốn mua <span class="required">*</span>
-</label>
+<textarea id="note"></textarea>
 
-<div class="products" id="products"></div>
+<h2>
+Sản phẩm muốn mua
+<span class="required">*</span>
+</h2>
 
-<div class="total" id="total">
-Tổng tiền: 0 VNĐ
+<div id="product-list"></div>
+
+<div id="product-blocks"></div>
+
+<div class="total">
+
+Tổng tiền:
+<span id="total">0</span> VNĐ
+
 </div>
 
-<div class="qr-title">
-QR Thanh toán
+<div class="qr-section">
+
+<h2>QR Thanh toán</h2>
+
+<img
+src="./a93db73a6b1d45faa4785ad8c31b863f.png"
+class="qr-image"
+/>
+
+<p class="note">
+
+Vui lòng chuyển đúng số tiền
+và upload bill chuyển khoản bên dưới.
+
+</p>
+
 </div>
 
-<div class="qr-box">
-<img src="./a93db73a6b1d45faa4785ad8c31b863f.png">
-</div>
+<h2>
 
-<div class="qr-note">
-Vui lòng chuyển đúng số tiền và upload bill chuyển khoản bên dưới.
-</div>
+Upload bill chuyển khoản
+<span class="required">*</span>
 
-<label class="file-upload">
-Upload bill chuyển khoản <span class="required">*</span>
-</label>
+</h2>
 
 <input
-required
 type="file"
-id="paymentImage"
+id="paymentProof"
 accept="image/*"
 />
 
-<button type="submit">
+<button onclick="submitOrder()">
 Gửi đơn hàng
 </button>
-
-</form>
 
 </div>
 
 <script>
 
+const CLOUDINARY_CLOUD_NAME = "ddpsybbri";
+
+const CLOUDINARY_UPLOAD_PRESET = "inno_upload";
+
 const GOOGLE_SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbz0HeVbyzDNWWMI4FnbjV--LSq3G-KqH6Og02gqzHS6cXSCqy2oHlr4458qsdElr4M0mg/exec";
-
-const CLOUDINARY_CLOUD_NAME = "ddpsybbri";
-const CLOUDINARY_UPLOAD_PRESET = "inno_upload";
 
 const products = [
 
@@ -417,94 +452,151 @@ colors:["Gold"]
 
 ];
 
-const productsDiv =
-document.getElementById("products");
+const productList =
+document.getElementById("product-list");
 
-products.forEach(p=>{
+const productBlocks =
+document.getElementById("product-blocks");
 
-const card =
+products.forEach((p,index)=>{
+
+const checkbox =
 document.createElement("div");
 
-card.className = "product-card";
+checkbox.className =
+"product-checkbox";
 
-card.innerHTML = `
+checkbox.innerHTML = `
 
-<div class="product-header">
+<div style="
+display:flex;
+align-items:center;
+gap:14px;
+width:100%;
+">
 
 <input
-class="product-checkbox"
 type="checkbox"
-id="${p.code}"
-onchange="toggleProduct('${p.code}')"
+id="check-${index}"
+onchange="toggleProduct(${index})"
 />
 
-<div class="product-info">
-
-<div class="product-title">
-${p.code} - ${p.name}
-</div>
-
-<div class="product-price">
-${p.price.toLocaleString()}đ
-</div>
-
-</div>
-
-</div>
-
-<div
-class="hidden"
-id="block_${p.code}"
+<label
+for="check-${index}"
+style="
+margin:0;
+cursor:pointer;
+line-height:1.5;
+"
 >
 
-<div class="color-grid">
+<b>${p.code}</b>
+- ${p.name}
 
-${p.colors.map(color=>`
+<span style="
+color:#666;
+font-weight:400;
+">
+(${p.price.toLocaleString()}đ)
+</span>
 
-<div class="color-item">
+</label>
 
-<span>${color}</span>
+</div>
+
+`;
+
+productList.appendChild(checkbox);
+
+const block =
+document.createElement("div");
+
+block.className =
+"product-block";
+
+block.id =
+`product-${index}`;
+
+let colorsHTML = "";
+
+p.colors.forEach(color=>{
+
+colorsHTML += `
+
+<div>
+
+<label>${color}</label>
 
 <input
 type="number"
 min="0"
-value="0"
 placeholder="Nhập số lượng"
+value=""
+disabled
 id="${p.code}_${color}"
 oninput="calculateTotal()"
 />
 
 </div>
 
-`).join("")}
+`;
 
+});
+
+block.innerHTML = `
+
+<div class="product-title">
+${p.name}
 </div>
 
+<div class="product-price">
+${p.price.toLocaleString()}đ
+</div>
+
+<div class="color-grid">
+${colorsHTML}
 </div>
 
 `;
 
-productsDiv.appendChild(card);
+productBlocks.appendChild(block);
 
 });
 
-function toggleProduct(code){
+function toggleProduct(index){
+
+const checked =
+document.getElementById(
+`check-${index}`
+).checked;
 
 const block =
-document.getElementById(`block_${code}`);
+document.getElementById(
+`product-${index}`
+);
 
-const checkbox =
-document.getElementById(code);
+block.style.display =
+checked ? "block" : "none";
 
-if(checkbox.checked){
+const product =
+products[index];
 
-block.classList.remove("hidden");
+product.colors.forEach(color=>{
 
-}else{
+const input =
+document.getElementById(
+`${product.code}_${color}`
+);
 
-block.classList.add("hidden");
+input.disabled = !checked;
+
+if(!checked){
+
+input.value = "";
 
 }
+
+});
 
 calculateTotal();
 
@@ -516,21 +608,21 @@ let total = 0;
 
 products.forEach(p=>{
 
-const checked =
-document.getElementById(p.code).checked;
-
-if(!checked) return;
-
 p.colors.forEach(color=>{
 
-const qty =
-parseInt(
+const input =
 document.getElementById(
 `${p.code}_${color}`
-).value || 0
 );
 
+if(input){
+
+const qty =
+parseInt(input.value || 0);
+
 total += qty * p.price;
+
+}
 
 });
 
@@ -538,84 +630,153 @@ total += qty * p.price;
 
 document.getElementById("total")
 .innerText =
-`Tổng tiền: ${total.toLocaleString()} VNĐ`;
+total.toLocaleString();
+
+}
+
+async function compressImage(file){
+
+return new Promise((resolve)=>{
+
+const reader =
+new FileReader();
+
+reader.readAsDataURL(file);
+
+reader.onload = (event)=>{
+
+const img = new Image();
+
+img.src = event.target.result;
+
+img.onload = ()=>{
+
+const canvas =
+document.createElement("canvas");
+
+const MAX_WIDTH = 1000;
+
+const scale =
+MAX_WIDTH / img.width;
+
+canvas.width = MAX_WIDTH;
+
+canvas.height =
+img.height * scale;
+
+const ctx =
+canvas.getContext("2d");
+
+ctx.drawImage(
+img,
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+canvas.toBlob(
+
+(blob)=>{
+
+resolve(blob);
+
+},
+
+"image/jpeg",
+0.7
+
+);
+
+};
+
+};
+
+});
 
 }
 
 async function uploadToCloudinary(file){
 
-const formData = new FormData();
+const compressedFile =
+await compressImage(file);
 
-formData.append("file", file);
+const formData =
+new FormData();
+
+formData.append(
+"file",
+compressedFile,
+"bill.jpg"
+);
 
 formData.append(
 "upload_preset",
 CLOUDINARY_UPLOAD_PRESET
 );
 
-const response = await fetch(
-
+const response =
+await fetch(
 `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
-
 {
 method:"POST",
 body:formData
 }
-
 );
 
-const data = await response.json();
+const data =
+await response.json();
 
 return data.secure_url;
 
 }
 
-document.getElementById("orderForm")
-.addEventListener("submit", async(e)=>{
-
-e.preventDefault();
+async function submitOrder(){
 
 const button =
 document.querySelector("button");
 
-button.disabled = true;
-button.innerText = "Đang gửi đơn...";
-
-try{
-
 const fullName =
-document.getElementById("fullName").value;
-
-const email =
-document.getElementById("email").value;
+document.getElementById("name").value.trim();
 
 const company =
-document.getElementById("company").value;
+document.getElementById("company").value.trim();
+
+const email =
+document.getElementById("email").value.trim();
 
 const employeeCode =
-document.getElementById("employeeCode").value;
+document.getElementById("employeeCode").value.trim();
 
 const phone =
-document.getElementById("phone").value;
+document.getElementById("phone").value.trim();
 
 const note =
-document.getElementById("note").value;
+document.getElementById("note").value.trim();
 
-const paymentFile =
-document.getElementById("paymentImage")
-.files[0];
+if(
+!fullName ||
+!company ||
+!email ||
+!employeeCode ||
+!phone ||
+!note
+){
 
-alert("Đang upload bill...");
+alert("Vui lòng nhập đầy đủ thông tin");
 
-const paymentImage =
-await uploadToCloudinary(paymentFile);
+return;
+
+}
 
 const items = [];
 
-products.forEach(p=>{
+products.forEach((p,index)=>{
 
 const checked =
-document.getElementById(p.code).checked;
+document.getElementById(
+`check-${index}`
+).checked;
 
 if(!checked) return;
 
@@ -623,12 +784,13 @@ let hasQty = false;
 
 p.colors.forEach(color=>{
 
-const qty =
-parseInt(
+const input =
 document.getElementById(
 `${p.code}_${color}`
-).value || 0
 );
+
+const qty =
+parseInt(input.value || 0);
 
 if(qty > 0){
 
@@ -650,32 +812,51 @@ total:qty * p.price
 
 if(!hasQty){
 
-alert(
-`Sản phẩm "${p.name}" chưa nhập số lượng nên sẽ không được tính vào đơn hàng.`
+throw new Error(
+`Vui lòng nhập số lượng cho ${p.name}`
 );
 
 }
 
 });
 
-if(items.length === 0){
+if(items.length===0){
 
-alert(
-"Vui lòng chọn ít nhất 1 sản phẩm có số lượng hợp lệ."
-);
-
-button.disabled = false;
-button.innerText = "Gửi đơn hàng";
+alert("Vui lòng chọn sản phẩm");
 
 return;
 
 }
 
+const file =
+document.getElementById("paymentProof").files[0];
+
+if(!file){
+
+alert("Vui lòng upload bill");
+
+return;
+
+}
+
+try{
+
+button.disabled = true;
+
+button.innerText =
+"Đang upload bill...";
+
+const paymentImage =
+await uploadToCloudinary(file);
+
+button.innerText =
+"Đang gửi đơn hàng...";
+
 const payload = {
 
 fullName,
-email,
 company,
+email,
 employeeCode,
 phone,
 note,
@@ -683,7 +864,7 @@ note,
 total:
 document.getElementById("total")
 .innerText
-.replace(/[^\d]/g,""),
+.replace(/,/g,""),
 
 paymentImage,
 
@@ -699,22 +880,29 @@ body:JSON.stringify(payload)
 }
 );
 
-alert("Đặt hàng thành công!");
+button.innerText =
+"Đặt hàng thành công";
+
+alert("Đặt hàng thành công");
 
 location.reload();
 
-}catch(err){
+}catch(error){
 
-console.error(err);
+console.error(error);
 
-alert("Có lỗi xảy ra.");
+alert(
+error.message || "Có lỗi xảy ra"
+);
 
 button.disabled = false;
-button.innerText = "Gửi đơn hàng";
+
+button.innerText =
+"Gửi đơn hàng";
 
 }
 
-});
+}
 
 </script>
 
