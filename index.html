@@ -496,7 +496,7 @@ async function submitOrder() {
         const qty = parseInt(input.value || 0);
         if (qty > 0) {
           hasQty = true;
-          items.push({ `${p.code} - ${p.name}`, color, qty, price: p.price, total: qty * p.price });
+          items.push({ product: `${p.code} - ${p.name}`, color, qty, price: p.price, total: qty * p.price });
         }
       });
       if (!hasQty) throw new Error(`Vui lòng nhập số lượng cho ${p.name}`);
