@@ -367,6 +367,12 @@ products.forEach((p, index) => {
   const checkbox = document.createElement("div");
   checkbox.className = "product-checkbox";
   checkbox.id = `card-${index}`;
+  checkbox.onclick = (e) => {
+  if (e.target.type === "checkbox") return;
+  const cb = document.getElementById(`check-${index}`);
+  cb.checked = !cb.checked;
+  toggleProduct(index);
+};
   checkbox.innerHTML = `
     <div style="display:flex;align-items:center;gap:14px;width:100%;">
       <input type="checkbox" id="check-${index}" onchange="toggleProduct(${index})"/>
