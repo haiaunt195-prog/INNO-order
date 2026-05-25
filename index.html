@@ -317,7 +317,21 @@ Tổng tiền: <span id="total">0</span> VNĐ
 </div>
 
 <script>
-
+// Kiểm tra hạn đăng ký
+const deadline = new Date("2026-05-20T23:59:59+07:00");
+if (new Date() > deadline) {
+  document.querySelector(".container").innerHTML = 
+    <div style="text-align:center;padding:60px 20px;">
+      <img src="https://raw.githubusercontent.com/haiaunt195-prog/INNO-order/main/logo-inno-black.png" style="width:160px;margin-bottom:32px;"/>
+      <div style="font-size:64px;margin-bottom:16px;">🔒</div>
+      <h2 style="font-size:28px;font-weight:700;margin-bottom:12px;">Chương trình đã kết thúc</h2>
+      <p style="font-size:16px;color:#666;line-height:1.7;">
+        Ưu đãi nội bộ đã kết thúc vào 23:59:59 ngày 24/05/2026.<br/>
+        Cảm ơn bạn đã quan tâm!
+      </p>
+    </div>
+  ;
+}
 const ADDRESS_MAP = {
   "OPPO_Công ty Cổ Phần Kỹ Thuật & Khoa Học Vĩnh Khang": "Tầng 16, tòa nhà UOA, 6 Tân Trào, P. Tân Mỹ, HCM",
   "DJI_Công Ty TNHH Kỹ Thuật Tầm Nhìn Toàn Cầu": "Tầng 5, tòa nhà UOA, 6 Tân Trào, P. Tân Mỹ",
