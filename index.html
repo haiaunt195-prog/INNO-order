@@ -318,19 +318,19 @@ Tổng tiền: <span id="total">0</span> VNĐ
 
 <script>
 // Kiểm tra hạn đăng ký
-const deadline = new Date("2026-05-24T23:59:59+07:00");
+const deadline = new Date("2026-05-20T23:59:59+07:00");
 if (new Date() > deadline) {
-  document.querySelector(".container").innerHTML = 
+  document.querySelector(".container").innerHTML = `
     <div style="text-align:center;padding:60px 20px;">
       <img src="https://raw.githubusercontent.com/haiaunt195-prog/INNO-order/main/logo-inno-black.png" style="width:160px;margin-bottom:32px;"/>
       <div style="font-size:64px;margin-bottom:16px;">🔒</div>
       <h2 style="font-size:28px;font-weight:700;margin-bottom:12px;">Chương trình đã kết thúc</h2>
       <p style="font-size:16px;color:#666;line-height:1.7;">
-        Ưu đãi nội bộ đã kết thúc vào 23:59:59 ngày 24/05/2026.<br/>
+        Ưu đãi nội bộ đã kết thúc vào 23:59:59 ngày 20/05/2026.<br/>
         Cảm ơn bạn đã quan tâm!
       </p>
     </div>
-  ;
+  `;
 }
 const ADDRESS_MAP = {
   "OPPO_Công ty Cổ Phần Kỹ Thuật & Khoa Học Vĩnh Khang": "Tầng 16, tòa nhà UOA, 6 Tân Trào, P. Tân Mỹ, HCM",
@@ -361,12 +361,12 @@ const CLOUDINARY_UPLOAD_PRESET = "inno_upload";
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz0HeVbyzDNWWMI4FnbjV--LSq3G-KqH6Og02gqzHS6cXSCqy2oHlr4458qsdElr4M0mg/exec";
 
 const products = [
-  { code:"INNO-B010", name:"Quạt InnoFans Handheld", price:200000, colors:["Bạc","Đen","Vàng"] },
+  { code:"INNO-B001", name:"Quạt InnoFans Handheld", price:200000, colors:["Bạc","Đen","Vàng"] },
   { code:"INNO-B015", name:"Quạt Innoyo Fan Air", price:250000, colors:["Hồng","Trắng","Tím"] },
   { code:"INNO-B003", name:"Quạt InnoFans Ice", price:210000, colors:["Trắng","Tím","Hồng"] },
   { code:"INNO-B009", name:"Quạt InnoFans Ice Pro", price:270000, colors:["Xám","Vàng","Đen"] },
-  { code:"INNO-B008", name:"Tăm nước Innoyo Water Flosser", price:470000, colors:["Trắng"] },
-  { code:"INNO-B007", name:"Tăm nước mini InnoCare Water Flosser Pocket", price:500000, colors:["Hồng","Xanh"]},
+  { code:"INNO-B008", name:"Tăm nước Innoyo Water Flosser", price:470000, colors:["Hồng","Xanh"] },
+  { code:"INNO-B007", name:"Tăm nước mini InnoCare Water Flosser Pocket", price:500000, colors:["Trắng"] },
   { code:"INNO-C001", name:"Máy rửa xe cầm tay InnoCare Cordless Washer Gun", price:599000, colors:["Default"] },
   { code:"P-PG-005", name:"Tay cầm chụp ảnh", price:600000, colors:["Default"] },
   { code:"P-PG-012", name:"Đèn trợ sáng điện thoại PGYTECH", price:270000, colors:["Default"] },
@@ -565,5 +565,4 @@ async function submitOrder() {
 
 </body>
 </html>
-
 
