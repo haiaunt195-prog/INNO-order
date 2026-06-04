@@ -548,17 +548,26 @@ window.addEventListener('DOMContentLoaded', async () => {
     hideLoading();
     return;
   }
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getInventory");
-    const data = await res.json();
-    if (data && data.inventory) inventory = data.inventory;
-    else useFallbackInventory();
-  } catch(e) {
-    console.warn("Inventory fetch failed, using defaults", e);
-    useFallbackInventory();
-  }
+
+  // Render ngay với fallback — tránh màn hình trống
+  useFallbackInventory();
   renderProducts();
   hideLoading();
+
+  // Sau đó fetch live inventory và re-render nếu thành công
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getInventory", { signal: controller.signal });
+    clearTimeout(timer);
+    const data = await res.json();
+    if (data && data.inventory) {
+      inventory = data.inventory;
+      renderProducts();
+    }
+  } catch(e) {
+    console.warn("Live inventory fetch failed, keeping fallback.", e);
+  }
 });
 
 function useFallbackInventory() {
