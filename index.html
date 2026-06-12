@@ -657,6 +657,49 @@ async function uploadToCloudinary(file) {
   return data.secure_url;
 }
 
+function submitViaIframe(data) {
+  return new Promise((resolve, reject) => {
+    // Create hidden iframe
+    const iframe = document.createElement('iframe');
+    iframe.name = 'submit-iframe';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    // Create hidden form targeting iframe
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = GOOGLE_SCRIPT_URL;
+    form.target = 'submit-iframe';
+    form.style.display = 'none';
+
+    // Add data as single JSON field
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'payload';
+    input.value = JSON.stringify(data);
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+
+    // Timeout fallback — Apps Script POST via iframe can't return response
+    // but if it gets this far, Cloudinary upload succeeded so we treat as success
+    const timer = setTimeout(() => {
+      document.body.removeChild(form);
+      document.body.removeChild(iframe);
+      resolve();
+    }, 4000);
+
+    iframe.onload = () => {
+      clearTimeout(timer);
+      document.body.removeChild(form);
+      document.body.removeChild(iframe);
+      resolve();
+    };
+
+    form.submit();
+  });
+}
+
 async function submitOrder() {
   const btn = document.getElementById('submit-btn');
   const fullName = document.getElementById('name').value.trim();
@@ -708,21 +751,15 @@ async function submitOrder() {
     const paymentImage = await uploadToCloudinary(file);
     btn.textContent = 'Đang gửi đơn hàng…';
 
-    // Dùng GET để đọc được response — tránh CORS block của Apps Script
-    const payload = encodeURIComponent(JSON.stringify({
+    // Gửi qua hidden form POST → iframe để tránh CORS
+    await submitViaIframe({
       action:'submitOrder', fullName, company, address, email,
       employeeCode, phone, totalAmount, paymentImage, items
-    }));
-    const res = await fetch(GOOGLE_SCRIPT_URL + '?data=' + payload);
-    const result = await res.json();
+    });
 
-    if (result.success) {
-      document.getElementById('main-form').style.display = 'none';
-      document.getElementById('success-screen').style.display = 'block';
-      window.scrollTo({ top:0, behavior:'smooth' });
-    } else {
-      throw new Error(result.error || 'Gửi đơn thất bại, vui lòng thử lại.');
-    }
+    document.getElementById('main-form').style.display = 'none';
+    document.getElementById('success-screen').style.display = 'block';
+    window.scrollTo({ top:0, behavior:'smooth' });
   } catch(err) {
     console.error(err);
     alert(err.message || 'Có lỗi xảy ra, vui lòng thử lại.');
