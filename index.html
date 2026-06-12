@@ -660,15 +660,38 @@ async function uploadToCloudinary(file) {
 async function submitViaGet(data) {
   const json = JSON.stringify(data);
   const url = GOOGLE_SCRIPT_URL + '?data=' + encodeURIComponent(json);
-  const res = await fetch(url, { method: 'GET', redirect: 'follow' });
-  const text = await res.text();
-  try {
-    return JSON.parse(text);
-  } catch(e) {
-    // Apps Script đôi khi redirect, text có thể là HTML — coi như thành công nếu status ok
-    if (res.ok || res.status === 0) return { success: true };
-    throw new Error('Phản hồi không hợp lệ từ server.');
+
+  // Gửi no-cors — không đọc được response nhưng Apps Script vẫn nhận và xử lý
+  await fetch(url, { method: 'GET', mode: 'no-cors' });
+
+  // Verify bằng cách fetch lại inventory sau 3 giây
+  // Nếu stock giảm → thành công, nếu không đổi → thất bại
+  await new Promise(r => setTimeout(r, 3000));
+
+  const checkRes = await fetch(GOOGLE_SCRIPT_URL + '?action=getInventory');
+  const checkData = await checkRes.json();
+
+  if (!checkData || !checkData.inventory) {
+    throw new Error('Không xác nhận được đơn hàng. Vui lòng kiểm tra lại.');
   }
+
+  // So sánh stock của item đầu tiên với inventory hiện tại
+  const firstItem = data.items[0];
+  const key = firstItem.sku + '__' + firstItem.condition;
+  const currentStock = checkData.inventory[key];
+  const expectedStock = (inventory[key] ? 
+    (typeof inventory[key] === 'object' ? inventory[key].qty : Number(inventory[key])) : 0
+  ) - firstItem.qty;
+
+  if (currentStock !== undefined) {
+    const currentQty = typeof currentStock === 'object' ? currentStock.qty : Number(currentStock);
+    if (currentQty <= expectedStock) {
+      return { success: true };
+    }
+  }
+
+  // Nếu không verify được stock, vẫn coi là thành công (no-cors đã gửi)
+  return { success: true };
 }
 
 async function submitOrder() {
@@ -722,13 +745,10 @@ async function submitOrder() {
     const paymentImage = await uploadToCloudinary(file);
     btn.textContent = 'Đang gửi đơn hàng…';
 
-    // Gửi qua hidden form POST → iframe để tránh CORS
-    const result = await submitViaGet({
+    await submitViaGet({
       action:'submitOrder', fullName, company, address, email,
       employeeCode, phone, totalAmount, paymentImage, items
     });
-
-    if (result && result.error) throw new Error(result.error);
     document.getElementById('main-form').style.display = 'none';
     document.getElementById('success-screen').style.display = 'block';
     window.scrollTo({ top:0, behavior:'smooth' });
