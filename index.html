@@ -273,9 +273,9 @@ const ADDRESS_MAP = {
 // ── CONDITION TYPES ──
 // key dùng làm id trong DOM, label hiển thị, badge class
 const COND = {
-  new:     { label:"New seal",                      badge:"badge-new",      icon:"✦" },
-  open:    { label:"Đã khui seal",                  badge:"badge-open",     icon:"◈" },
-  nosac:   { label:"Đã khui seal – Thiếu dây sạc",  badge:"badge-opennosac",icon:"◌" }
+  new:   { label:"New seal",                     badgeLabel:"New seal (mới 100%)",                                                badge:"badge-new",       icon:"✦" },
+  open:  { label:"Đã khui seal",                 badgeLabel:"Đã khui seal – hàng trải nghiệm, hàng chụp ảnh PR, hàng trưng bày", badge:"badge-open",      icon:"◈" },
+  nosac: { label:"Đã khui seal – Thiếu dây sạc", badgeLabel:"Đã khui seal – Thiếu dây sạc (hàng trải nghiệm / PR / trưng bày)", badge:"badge-opennosac", icon:"◌" }
 };
 
 // ── CATALOG ──
@@ -288,6 +288,12 @@ const CATALOG = [
     variants:[
       { sku:"010-02562-50", color:"Đen",
         conditions:{ new:{qty:0,price:0}, open:{qty:5,price:1200000}, nosac:{qty:4,price:1000000} }}
+    ]},
+  { category:"⌚ Đồng hồ thông minh", id:"g-fr165m",
+    name:"Garmin Forerunner 165 Music GPS WiFi", note:null,
+    variants:[
+      { sku:"010-02863-B3", color:"Hồng Fuchsia / San Hô",
+        conditions:{ new:{qty:0,price:0}, open:{qty:3,price:1500000}, nosac:{qty:2,price:1300000} }}
     ]},
   { category:"⌚ Đồng hồ thông minh", id:"g-venusq2",
     name:"Garmin Venu Sq 2", note:null,
@@ -496,7 +502,7 @@ function renderProducts() {
         }).join('');
 
         return `<div class="cond-panel ${i===0?'active':''}" id="panel-${g.id}-${c}">
-          <div class="cond-badge ${COND[c].badge}">${COND[c].icon} ${COND[c].label}</div>
+          <div class="cond-badge ${COND[c].badge}">${COND[c].icon} ${COND[c].badgeLabel}</div>
           ${variantsHTML}
         </div>`;
       }).join('');
