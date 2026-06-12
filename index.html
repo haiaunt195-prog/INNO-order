@@ -289,7 +289,12 @@ const CATALOG = [
       { sku:"010-02562-50", color:"Đen",
         conditions:{ new:{qty:0,price:0}, open:{qty:5,price:1200000}, nosac:{qty:4,price:1000000} }}
     ]},
-  
+  { category:"⌚ Đồng hồ thông minh", id:"g-fr165m",
+    name:"Garmin Forerunner 165 Music GPS WiFi", note:null,
+    variants:[
+      { sku:"010-02863-B3", color:"Hồng Fuchsia / San Hô",
+        conditions:{ new:{qty:0,price:0}, open:{qty:3,price:1500000}, nosac:{qty:2,price:1300000} }}
+    ]},
   { category:"⌚ Đồng hồ thông minh", id:"g-venusq2",
     name:"Garmin Venu Sq 2", note:null,
     variants:[
@@ -411,11 +416,16 @@ window.addEventListener('DOMContentLoaded', async () => {
     const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getInventory", { signal: ctrl.signal });
     clearTimeout(t);
     const data = await res.json();
-    if (data && data.inventory && Object.values(data.inventory).some(v => Number(v) > 0)) {
-      // Map flat sku->stock to our sku__cond format via CATALOG prices
-      // GSheet stores each sku__cond as separate key
-      inventory = data.inventory;
-      renderProducts();
+    if (data && data.inventory && Object.keys(data.inventory).length > 0) {
+      // Validate: có ít nhất 1 key có qty > 0
+      const hasStock = Object.values(data.inventory).some(v => {
+        if (typeof v === 'object') return v.qty > 0;
+        return Number(v) > 0;
+      });
+      if (hasStock) {
+        inventory = data.inventory;
+        renderProducts();
+      }
     }
   } catch(e) { console.warn("Live inventory fetch failed", e); }
 });
