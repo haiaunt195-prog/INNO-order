@@ -690,7 +690,7 @@ async function submitOrder() {
     }
     items.push({
       sku: originalSku, product: productName, color: colorName,
-      condition: COND[cond].label,
+      condition: cond,
       qty: q, price: getPrice(sku, cond), subtotal: q * getPrice(sku, cond)
     });
   });
@@ -709,6 +709,8 @@ async function submitOrder() {
     btn.textContent = 'Đang gửi đơn hàng…';
     await fetch(GOOGLE_SCRIPT_URL, {
       method:'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({ action:'submitOrder', fullName, company, address, email, employeeCode, phone, totalAmount, paymentImage, items })
     });
     document.getElementById('main-form').style.display = 'none';
