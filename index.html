@@ -289,6 +289,7 @@ const CATALOG = [
       { sku:"010-02562-50", color:"Đen",
         conditions:{ new:{qty:0,price:0}, open:{qty:5,price:1200000}, nosac:{qty:4,price:1000000} }}
     ]},
+  
   { category:"⌚ Đồng hồ thông minh", id:"g-venusq2",
     name:"Garmin Venu Sq 2", note:null,
     variants:[
@@ -413,7 +414,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   try {
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), 8000);
-    const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getInventory", { signal: ctrl.signal });
+    const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getInventory", { signal: ctrl.signal, redirect: "follow" });
     clearTimeout(t);
     const data = await res.json();
     if (data && data.inventory && Object.keys(data.inventory).length > 0) {
@@ -667,7 +668,7 @@ async function submitViaGet(data) {
   const url = GOOGLE_SCRIPT_URL + '?data=' + encodeURIComponent(json);
 
   // Fetch thông thường — Apps Script GET đã hỗ trợ CORS
-  const res = await fetch(url, { method: 'GET' });
+  const res = await fetch(url, { method: 'GET', redirect: 'follow' });
   const text = await res.text();
 
   let result;
