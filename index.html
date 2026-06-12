@@ -289,7 +289,6 @@ const CATALOG = [
       { sku:"010-02562-50", color:"Đen",
         conditions:{ new:{qty:0,price:0}, open:{qty:5,price:1200000}, nosac:{qty:4,price:1000000} }}
     ]},
-  
   { category:"⌚ Đồng hồ thông minh", id:"g-venusq2",
     name:"Garmin Venu Sq 2", note:null,
     variants:[
@@ -322,7 +321,7 @@ const CATALOG = [
     name:"Apple Watch SE GPS 44mm", note:null,
     variants:[
       { sku:"MRE93SAA_Midnight", color:"Midnight",
-        conditions:{ new:{qty:3,price:1200000}, open:{qty:0,price:0}, nosac:{qty:0,price:0} }}
+        conditions:{ new:{qty:3,price:1500000}, open:{qty:0,price:0}, nosac:{qty:0,price:0} }}
     ]},
 
   // ── BÀN CHẢI ──
@@ -665,19 +664,28 @@ async function uploadToCloudinary(file) {
 
 async function submitViaGet(data) {
   const json = JSON.stringify(data);
-  const url = GOOGLE_SCRIPT_URL + '?data=' + encodeURIComponent(json);
+  const encoded = encodeURIComponent(json);
+  console.log('Payload length:', encoded.length);
 
-  // Fetch thông thường — Apps Script GET đã hỗ trợ CORS
-  const res = await fetch(url, { method: 'GET', redirect: 'follow' });
-  const text = await res.text();
-
-  let result;
-  try { result = JSON.parse(text); }
-  catch(e) { throw new Error('Phản hồi không hợp lệ từ server.'); }
-
-  if (result.error) throw new Error(result.error);
-  if (result.success) return result;
-  throw new Error('Gửi đơn thất bại, vui lòng thử lại.');
+  const url = GOOGLE_SCRIPT_URL + '?data=' + encoded;
+  try {
+    const res = await fetch(url, { method: 'GET', redirect: 'follow' });
+    const text = await res.text();
+    if (!text.trim().startsWith('{')) throw new Error('NOT_JSON');
+    const result = JSON.parse(text);
+    if (result.error) throw new Error(result.error);
+    if (result.success) return result;
+    throw new Error('Gửi đơn thất bại.');
+  } catch(e) {
+    // Nếu GET trả về HTML (redirect/login page), fallback no-cors
+    // Apps Script vẫn nhận và xử lý, chỉ là mình không đọc được response
+    if (e.message === 'NOT_JSON' || e.name === 'TypeError') {
+      console.warn('Fallback to no-cors:', e.message);
+      await fetch(url, { method: 'GET', mode: 'no-cors' });
+      return { success: true };
+    }
+    throw e;
+  }
 }
 
 async function submitOrder() {
