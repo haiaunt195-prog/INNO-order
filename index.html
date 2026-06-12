@@ -666,37 +666,17 @@ async function submitViaGet(data) {
   const json = JSON.stringify(data);
   const url = GOOGLE_SCRIPT_URL + '?data=' + encodeURIComponent(json);
 
-  // Gửi no-cors — không đọc được response nhưng Apps Script vẫn nhận và xử lý
-  await fetch(url, { method: 'GET', mode: 'no-cors' });
+  // Fetch thông thường — Apps Script GET đã hỗ trợ CORS
+  const res = await fetch(url, { method: 'GET' });
+  const text = await res.text();
 
-  // Verify bằng cách fetch lại inventory sau 3 giây
-  // Nếu stock giảm → thành công, nếu không đổi → thất bại
-  await new Promise(r => setTimeout(r, 3000));
+  let result;
+  try { result = JSON.parse(text); }
+  catch(e) { throw new Error('Phản hồi không hợp lệ từ server.'); }
 
-  const checkRes = await fetch(GOOGLE_SCRIPT_URL + '?action=getInventory');
-  const checkData = await checkRes.json();
-
-  if (!checkData || !checkData.inventory) {
-    throw new Error('Không xác nhận được đơn hàng. Vui lòng kiểm tra lại.');
-  }
-
-  // So sánh stock của item đầu tiên với inventory hiện tại
-  const firstItem = data.items[0];
-  const key = firstItem.sku + '__' + firstItem.condition;
-  const currentStock = checkData.inventory[key];
-  const expectedStock = (inventory[key] ? 
-    (typeof inventory[key] === 'object' ? inventory[key].qty : Number(inventory[key])) : 0
-  ) - firstItem.qty;
-
-  if (currentStock !== undefined) {
-    const currentQty = typeof currentStock === 'object' ? currentStock.qty : Number(currentStock);
-    if (currentQty <= expectedStock) {
-      return { success: true };
-    }
-  }
-
-  // Nếu không verify được stock, vẫn coi là thành công (no-cors đã gửi)
-  return { success: true };
+  if (result.error) throw new Error(result.error);
+  if (result.success) return result;
+  throw new Error('Gửi đơn thất bại, vui lòng thử lại.');
 }
 
 async function submitOrder() {
