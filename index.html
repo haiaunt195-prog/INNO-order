@@ -183,28 +183,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
         <div class="field"><label>Họ và tên <span class="required">*</span></label><input id="name" placeholder="Nguyễn Văn A"/></div>
         <div class="field"><label>Mã nhân viên <span class="required">*</span></label><input id="employeeCode" placeholder="INNO2001"/></div>
       </div>
-      <div class="field">
-        <label>Công ty <span class="required">*</span></label>
-        <select id="company" onchange="updateAddress()">
-          <option value="">-- Chọn công ty --</option>
-          <option value="OPPO_Công ty Cổ Phần Kỹ Thuật & Khoa Học Vĩnh Khang">OPPO – Vĩnh Khang</option>
-          <option value="DJI_Công Ty TNHH Kỹ Thuật Tầm Nhìn Toàn Cầu">DJI – Tầm Nhìn Toàn Cầu</option>
-          <option value="[HCM] O-TECH_Công Ty TNHH Thiết Bị Thông Minh O-TECH HCM">[HCM] O-TECH</option>
-          <option value="[HN] O-TECH_Công Ty TNHH Thiết Bị Thông Minh O-TECH Hà Nội">[HN] O-TECH</option>
-          <option value="EV Power_Công Ty TNHH EV Power">EV Power</option>
-          <option value="NAM VIỆT_Công ty Cổ Phần Nam Việt Land">NAM VIỆT Land</option>
-          <option value="Service">Service</option>
-          <option value="Call center">Call center</option>
-          <option value="Kho HCM">Kho HCM</option>
-          <option value="Kho Hà Nội">Kho Hà Nội</option>
-          <option value="Oway Sài Gòn">Oway Sài Gòn</option>
-          <option value="Oway Biên Hoà">Oway Biên Hoà</option>
-          <option value="Oway Quy Nhơn">Oway Quy Nhơn</option>
-          <option value="Oway Đà Nẵng">Oway Đà Nẵng</option>
-          <option value="INNO_Công Ty TNHH Thiết Bị Thông Minh INNO">INNO Smart Living</option>
-        </select>
+      <div class="field" style="display:none;">
+        <select id="company"><option value="INNO_Công Ty TNHH Thiết Bị Thông Minh INNO" selected>INNO Smart Living</option></select>
       </div>
-      <div class="field"><label>Địa chỉ nhận hàng <span class="required">*</span></label><input id="address" readonly placeholder="Tự động điền khi chọn công ty"/></div>
+      <div class="field">
+        <label>Địa chỉ nhận hàng <span class="required">*</span></label>
+        <input id="address" placeholder="Tên Công ty - Địa chỉ công ty"/>
+        <div style="font-size:13px;color:var(--ink3);margin-top:6px;line-height:1.6;">
+          💡 Ví dụ: <em>INNO Smart Living - 12 đường số 5 KDC Sadeco, phường Tân Phong, Quận 7 HCM</em>
+        </div>
+      </div>
       <div class="field-row">
         <div class="field"><label>Email công ty <span class="required">*</span></label><input type="email" id="email" placeholder="example@company.com"/></div>
         <div class="field"><label>Số điện thoại <span class="required">*</span></label><input id="phone" placeholder="0901234567"/></div>
@@ -288,6 +276,12 @@ const CATALOG = [
     variants:[
       { sku:"010-02562-50", color:"Đen",
         conditions:{ new:{qty:0,price:0}, open:{qty:5,price:1200000}, nosac:{qty:4,price:1000000} }}
+    ]},
+  { category:"⌚ Đồng hồ thông minh", id:"g-fr165m",
+    name:"Garmin Forerunner 165 Music GPS WiFi", note:null,
+    variants:[
+      { sku:"010-02863-B3", color:"Hồng Fuchsia / San Hô",
+        conditions:{ new:{qty:0,price:0}, open:{qty:3,price:1500000}, nosac:{qty:2,price:1300000} }}
     ]},
   { category:"⌚ Đồng hồ thông minh", id:"g-venusq2",
     name:"Garmin Venu Sq 2", note:null,
