@@ -276,8 +276,7 @@ const COND = {
 // qty=0 hoặc price=0 → không hiện condition đó
 const CATALOG = [
   // ── ĐỒNG HỒ ──
- 
-
+  
   { category:"⌚ Đồng hồ thông minh", id:"g-venusq2",
     name:"Garmin Venu Sq 2", note:null,
     variants:[
@@ -286,22 +285,7 @@ const CATALOG = [
       { sku:"010-02701-80", color:"Xám Khói / Đá Phiến",
         conditions:{ new:{qty:0,price:1500000}, open:{qty:0,price:1200000}, nosac:{qty:0,price:1000000} }}
     ]},
-
-  // ── BÀN CHẢI ──
-  { category:"🪥 Bàn chải điện Laifen", id:"l-tb01-pg",
-    name:"Laifen TB01 (điện rung)", note:"baohanh",
-    variants:[
-      { sku:"LFTB01-PG_Hồng", color:"Hồng",
-        conditions:{ new:{qty:0,price:350000}, open:{qty:0,price:0}, nosac:{qty:0,price:0} }},
-      { sku:"LFTB01-PG_Xanh", color:"Xanh",
-        conditions:{ new:{qty:0,price:350000}, open:{qty:0,price:0}, nosac:{qty:0,price:0} }}
-    ]},
-  { category:"🪥 Bàn chải điện Laifen", id:"l-tb01-p",
-    name:"Laifen Wave ABS", note:"baohanh",
-    variants:[
-      { sku:"LFTB01-P", color:"Trắng",
-        conditions:{ new:{qty:0,price:250000}, open:{qty:0,price:0}, nosac:{qty:0,price:0} }}
-    ]},
+  
 
   // ── MÁY SẤY TÓC ──
   { category:"💨 Máy sấy tóc Laifen", id:"l-mini",
@@ -626,21 +610,22 @@ async function uploadToCloudinary(file) {
 }
 
 async function submitViaGet(data) {
-  // Gửi qua Vercel API route — server-side, không bị CORS
-  const res = await fetch('/api/submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
-
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.error || 'Lỗi kết nối server (' + res.status + ')');
+  // Gửi lên Apps Script qua GET
+  const url = GOOGLE_SCRIPT_URL + '?data=' + encodeURIComponent(JSON.stringify(data));
+  try {
+    const res = await fetch(url, { method: 'GET', redirect: 'follow' });
+    const text = await res.text();
+    if (!text.trim().startsWith('{')) throw new Error('NOT_JSON');
+    const result = JSON.parse(text);
+    if (result.error) throw new Error(result.error);
+    return result;
+  } catch(e) {
+    if (e.message === 'NOT_JSON' || e.name === 'TypeError') {
+      await fetch(url, { method: 'GET', mode: 'no-cors' });
+      return { success: true };
+    }
+    throw e;
   }
-
-  const result = await res.json();
-  if (result.error) throw new Error(result.error);
-  return result;
 }
 
 async function submitOrder() {
