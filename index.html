@@ -8,6 +8,8 @@
 <meta http-equiv="Expires" content="0"/>
 <title>INNO ƯU ĐÃI NỘI BỘ — Thanh Lý</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("PdlLdDVolSjreY_Sh");</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"/>
 <style>
 :root{
@@ -278,50 +280,108 @@ const CATALOG = [
     name:"Garmin Forerunner 55 GPS", note:null,
     variants:[
       { sku:"010-02562-50", color:"Đen",
-        conditions:{ new:{qty:0,price:0}, open:{qty:5,price:1200000}, nosac:{qty:4,price:1000000} }}
+        conditions:{ new:{qty:0,price:0}, open:{qty:0,price:1200000}, nosac:{qty:0,price:1000000} }}
     ]},
- 
+  { category:"⌚ Đồng hồ thông minh", id:"g-fr165m",
+    name:"Garmin Forerunner 165 Music GPS WiFi", note:null,
+    variants:[
+      { sku:"010-02863-B3", color:"Hồng Fuchsia / San Hô",
+        conditions:{ new:{qty:0,price:0}, open:{qty:0,price:1500000}, nosac:{qty:0,price:1300000} }}
+    ]},
   { category:"⌚ Đồng hồ thông minh", id:"g-venusq2",
     name:"Garmin Venu Sq 2", note:null,
     variants:[
       { sku:"010-02701-81", color:"Trắng / Vàng Kem",
-        conditions:{ new:{qty:0,price:0}, open:{qty:1,price:1200000}, nosac:{qty:0,price:0} }},
+        conditions:{ new:{qty:0,price:0}, open:{qty:0,price:1200000}, nosac:{qty:0,price:0} }},
       { sku:"010-02701-80", color:"Xám Khói / Đá Phiến",
-        conditions:{ new:{qty:5,price:1500000}, open:{qty:6,price:1200000}, nosac:{qty:2,price:1000000} }}
+        conditions:{ new:{qty:0,price:1500000}, open:{qty:0,price:1200000}, nosac:{qty:0,price:1000000} }}
+    ]},
+  { category:"⌚ Đồng hồ thông minh", id:"g-lily2",
+    name:"Garmin Lily 2", note:null,
+    variants:[
+      { sku:"010-02839-20", color:"Viền vàng kem, dây silicone trắng",
+        conditions:{ new:{qty:0,price:0}, open:{qty:0,price:2000000}, nosac:{qty:0,price:0} }},
+      { sku:"010-02839-63", color:"Classic – Viền xám, dây vải xanh xám",
+        conditions:{ new:{qty:0,price:0}, open:{qty:0,price:2000000}, nosac:{qty:0,price:1800000} }}
+    ]},
+  { category:"⌚ Đồng hồ thông minh", id:"g-va5",
+    name:"Garmin vivoactive 5", note:null,
+    variants:[
+      { sku:"010-02862-52", color:"Dây Xanh / Viền Xanh kim loại",
+        conditions:{ new:{qty:0,price:0}, open:{qty:0,price:1800000}, nosac:{qty:0,price:1600000} }}
+    ]},
+  { category:"⌚ Đồng hồ thông minh", id:"g-aw-s9",
+    name:"Apple Watch Series 9 GPS 41mm", note:null,
+    variants:[
+      { sku:"MR8W3SAA", color:"Midnight",
+        conditions:{ new:{qty:0,price:0}, open:{qty:0,price:1500000}, nosac:{qty:0,price:1200000} }}
+    ]},
+  { category:"⌚ Đồng hồ thông minh", id:"g-aw-se",
+    name:"Apple Watch SE GPS 44mm", note:null,
+    variants:[
+      { sku:"MRE93SAA_Midnight", color:"Midnight",
+        conditions:{ new:{qty:0,price:1500000}, open:{qty:0,price:0}, nosac:{qty:0,price:0} }}
     ]},
 
+  // ── BÀN CHẢI ──
+  { category:"🪥 Bàn chải điện Laifen", id:"l-tb01-pg",
+    name:"Laifen TB01 (điện rung)", note:"baohanh",
+    variants:[
+      { sku:"LFTB01-PG_Hồng", color:"Hồng",
+        conditions:{ new:{qty:0,price:350000}, open:{qty:0,price:0}, nosac:{qty:0,price:0} }},
+      { sku:"LFTB01-PG_Xanh", color:"Xanh",
+        conditions:{ new:{qty:0,price:350000}, open:{qty:0,price:0}, nosac:{qty:0,price:0} }}
+    ]},
+  { category:"🪥 Bàn chải điện Laifen", id:"l-tb01-p",
+    name:"Laifen Wave ABS", note:"baohanh",
+    variants:[
+      { sku:"LFTB01-P", color:"Trắng",
+        conditions:{ new:{qty:0,price:250000}, open:{qty:0,price:0}, nosac:{qty:0,price:0} }}
+    ]},
 
   // ── MÁY SẤY TÓC ──
   { category:"💨 Máy sấy tóc Laifen", id:"l-mini",
     name:"Laifen Mini", note:null,
     variants:[
-      { sku:"Mini_Hồng",  color:"Hồng",      conditions:{ new:{qty:0,price:0},   open:{qty:2,price:600000}, nosac:{qty:0,price:0} }},
-      { sku:"Mini_Trắng", color:"Trắng",     conditions:{ new:{qty:12,price:800000}, open:{qty:3,price:600000}, nosac:{qty:0,price:0} }},
-      { sku:"Mini_Xanh dương",color:"Xanh dương",conditions:{ new:{qty:1,price:800000},  open:{qty:1,price:600000}, nosac:{qty:0,price:0} }},
-      { sku:"Mini_Xanh lá",   color:"Xanh lá",   conditions:{ new:{qty:0,price:0},   open:{qty:7,price:600000}, nosac:{qty:0,price:0} }}
+      { sku:"Mini_Hồng",  color:"Hồng",      conditions:{ new:{qty:0,price:0},   open:{qty:0,price:600000}, nosac:{qty:0,price:0} }},
+      { sku:"Mini_Trắng", color:"Trắng",     conditions:{ new:{qty:0,price:800000}, open:{qty:0,price:600000}, nosac:{qty:0,price:0} }},
+      { sku:"Mini_Xanh dương",color:"Xanh dương",conditions:{ new:{qty:0,price:800000},  open:{qty:0,price:600000}, nosac:{qty:0,price:0} }},
+      { sku:"Mini_Xanh lá",   color:"Xanh lá",   conditions:{ new:{qty:0,price:0},   open:{qty:0,price:600000}, nosac:{qty:0,price:0} }}
     ]},
   { category:"💨 Máy sấy tóc Laifen", id:"l-se",
     name:"Laifen SE", note:null,
     variants:[
-      { sku:"SE_Hồng",  color:"Hồng",  conditions:{ new:{qty:0,price:0}, open:{qty:17,price:700000}, nosac:{qty:0,price:0} }},
-      { sku:"SE_Tím",   color:"Tím",   conditions:{ new:{qty:0,price:0}, open:{qty:2,price:700000},  nosac:{qty:0,price:0} }},
-      { sku:"SE_Trắng", color:"Trắng", conditions:{ new:{qty:0,price:0}, open:{qty:1,price:700000},  nosac:{qty:0,price:0} }},
-      { sku:"SE_Xanh",  color:"Xanh",  conditions:{ new:{qty:0,price:0}, open:{qty:2,price:700000},  nosac:{qty:0,price:0} }}
+      { sku:"SE_Hồng",  color:"Hồng",  conditions:{ new:{qty:0,price:0}, open:{qty:0,price:700000}, nosac:{qty:0,price:0} }},
+      { sku:"SE_Tím",   color:"Tím",   conditions:{ new:{qty:0,price:0}, open:{qty:0,price:700000},  nosac:{qty:0,price:0} }},
+      { sku:"SE_Trắng", color:"Trắng", conditions:{ new:{qty:0,price:0}, open:{qty:0,price:700000},  nosac:{qty:0,price:0} }},
+      { sku:"SE_Xanh",  color:"Xanh",  conditions:{ new:{qty:0,price:0}, open:{qty:0,price:700000},  nosac:{qty:0,price:0} }}
     ]},
   { category:"💨 Máy sấy tóc Laifen", id:"l-se-lite",
     name:"Laifen SE Lite", note:null,
     variants:[
-      { sku:"SE-Lite_Nâu nhạt", color:"Nâu nhạt", conditions:{ new:{qty:6,price:700000},  open:{qty:2,price:500000}, nosac:{qty:0,price:0} }},
-      { sku:"SE-Lite_Tím", color:"Tím",      conditions:{ new:{qty:11,price:700000}, open:{qty:12,price:500000},nosac:{qty:0,price:0} }},
-      { sku:"SE-Lite_Xanh lá", color:"Xanh lá",  conditions:{ new:{qty:3,price:700000},  open:{qty:0,price:500000}, nosac:{qty:0,price:0} }}
+      { sku:"SE-Lite_Nâu nhạt", color:"Nâu nhạt", conditions:{ new:{qty:0,price:700000},  open:{qty:0,price:500000}, nosac:{qty:0,price:0} }},
+      { sku:"SE-Lite_Tím", color:"Tím",      conditions:{ new:{qty:0,price:700000}, open:{qty:0,price:500000},nosac:{qty:0,price:0} }},
+      { sku:"SE-Lite_Xanh lá", color:"Xanh lá",  conditions:{ new:{qty:0,price:700000},  open:{qty:0,price:500000}, nosac:{qty:0,price:0} }}
     ]},
-
+  { category:"💨 Máy sấy tóc Laifen", id:"l-swift",
+    name:"Laifen Swift", note:null,
+    variants:[
+      { sku:"Swift_Tím", color:"Tím", conditions:{ new:{qty:0,price:0}, open:{qty:0,price:500000}, nosac:{qty:0,price:0} }}
+    ]},
   { category:"💨 Máy sấy tóc Laifen", id:"l-swift-p",
     name:"Laifen Swift Premium", note:null,
     variants:[
-      { sku:"Swift-Premium_Vàng hồng",  color:"Vàng hồng",  conditions:{ new:{qty:0,price:0}, open:{qty:2,price:900000}, nosac:{qty:0,price:0} }},
-      { sku:"Swift-Premium_Vàng trắng", color:"Vàng trắng", conditions:{ new:{qty:0,price:0}, open:{qty:6,price:900000}, nosac:{qty:0,price:0} }},
-      { sku:"Swift-Premium_Vàng xanh",  color:"Vàng xanh",  conditions:{ new:{qty:0,price:0}, open:{qty:8,price:900000}, nosac:{qty:0,price:0} }}
+      { sku:"Swift-Premium_Vàng hồng",  color:"Vàng hồng",  conditions:{ new:{qty:0,price:0}, open:{qty:0,price:900000}, nosac:{qty:0,price:0} }},
+      { sku:"Swift-Premium_Vàng trắng", color:"Vàng trắng", conditions:{ new:{qty:0,price:0}, open:{qty:0,price:900000}, nosac:{qty:0,price:0} }},
+      { sku:"Swift-Premium_Vàng xanh",  color:"Vàng xanh",  conditions:{ new:{qty:0,price:0}, open:{qty:0,price:900000}, nosac:{qty:0,price:0} }}
+    ]},
+
+  // ── LOA ALPHA WORKS ──
+  { category:"🔊 Loa Alpha Works", id:"aw-ride-blu",
+    name:"Alpha Works AW-RIDE", note:null,
+    variants:[
+      { sku:"D2", color:"Xanh da trời",
+        conditions:{ new:{qty:0,price:0}, open:{qty:0,price:200000}, nosac:{qty:0,price:0} }}
     ]}
 ];
 
@@ -602,29 +662,21 @@ async function uploadToCloudinary(file) {
 }
 
 async function submitViaGet(data) {
-  const json = JSON.stringify(data);
-  const encoded = encodeURIComponent(json);
-  console.log('Payload length:', encoded.length);
+  // Gửi qua Vercel API route — server-side, không bị CORS
+  const res = await fetch('/api/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
 
-  const url = GOOGLE_SCRIPT_URL + '?data=' + encoded;
-  try {
-    const res = await fetch(url, { method: 'GET', redirect: 'follow' });
-    const text = await res.text();
-    if (!text.trim().startsWith('{')) throw new Error('NOT_JSON');
-    const result = JSON.parse(text);
-    if (result.error) throw new Error(result.error);
-    if (result.success) return result;
-    throw new Error('Gửi đơn thất bại.');
-  } catch(e) {
-    // Nếu GET trả về HTML (redirect/login page), fallback no-cors
-    // Apps Script vẫn nhận và xử lý, chỉ là mình không đọc được response
-    if (e.message === 'NOT_JSON' || e.name === 'TypeError') {
-      console.warn('Fallback to no-cors:', e.message);
-      await fetch(url, { method: 'GET', mode: 'no-cors' });
-      return { success: true };
-    }
-    throw e;
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || 'Lỗi kết nối server (' + res.status + ')');
   }
+
+  const result = await res.json();
+  if (result.error) throw new Error(result.error);
+  return result;
 }
 
 async function submitOrder() {
@@ -677,6 +729,29 @@ async function submitOrder() {
     btn.disabled = true; btn.textContent = 'Đang upload bill…';
     const paymentImage = await uploadToCloudinary(file);
     btn.textContent = 'Đang gửi đơn hàng…';
+
+    // Gửi email backup TRƯỚC — đảm bảo luôn có record
+    try {
+      const itemsText = items.map(i =>
+        `${i.product} | ${i.color} | ${COND[i.condition]?.label || i.condition} | SL: ${i.qty} | ${i.price.toLocaleString('vi-VN')}đ`
+      ).join('\n');
+
+      await emailjs.send('service_m7vhscf', 'template_lgr2pou', {
+        from_name: fullName,
+        employee_code: employeeCode,
+        phone: phone,
+        reply_to: email,
+        address: address,
+        total: totalAmount.toLocaleString('vi-VN') + 'đ',
+        bill_url: paymentImage,
+        items: itemsText,
+        timestamp: new Date().toLocaleString('vi-VN', {timeZone:'Asia/Ho_Chi_Minh'})
+      });
+      console.log('Email backup sent');
+    } catch(emailErr) {
+      console.warn('Email backup failed:', emailErr);
+      // Không throw — vẫn tiếp tục gửi lên Apps Script
+    }
 
     await submitViaGet({
       action:'submitOrder', fullName, company, address, email,
