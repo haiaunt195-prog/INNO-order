@@ -1,720 +1,529 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-<meta http-equiv="Pragma" content="no-cache"/>
-<meta http-equiv="Expires" content="0"/>
-<title>INNO ƯU ĐÃI NỘI BỘ — Thanh Lý</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>emailjs.init("PdlLdDVolSjreY_Sh");</script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UWANT Support — UX Mockup</title>
 <style>
-:root{
-  --bg:#f7f6f2;--surface:#fff;--ink:#111;--ink2:#555;--ink3:#999;
-  --accent:#c8a84b;--accent2:#e8d5a3;--border:#e3e1d9;--danger:#c0392b;
-  --green:#27ae60;--radius:16px;--radius-sm:10px;
-  --shadow:0 2px 20px rgba(0,0,0,0.07);--shadow-lg:0 8px 40px rgba(0,0,0,0.12);
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;padding:0 0 80px;font-size:18px;}
+  :root {
+    --sand: #F2EFE8;
+    --white: #FAFAFA;
+    --platinum: #CACAC8;
+    --gold: #C9A646;
+    --charcoal: #16211C;
+    --text-muted: #7A7A76;
+    --radius-sm: 8px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 16px;
+  }
 
-/* HEADER */
-.page-header{background:var(--ink);color:#fff;text-align:center;padding:44px 24px 36px;position:relative;overflow:hidden;}
-.page-header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,0.02) 40px,rgba(255,255,255,0.02) 41px);}
-.header-logo{width:130px;filter:brightness(0) invert(1);margin-bottom:20px;position:relative;}
-.header-tag{display:inline-block;background:var(--accent);color:var(--ink);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:100px;margin-bottom:14px;position:relative;}
-.header-title{font-family:'DM Serif Display',serif;font-size:clamp(26px,5vw,48px);line-height:1.1;position:relative;}
-.header-sub{margin-top:8px;font-size:13px;color:rgba(255,255,255,0.45);font-weight:300;position:relative;}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* LOADING */
-#loading-overlay{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:14px;transition:opacity 0.4s;}
-#loading-overlay.hidden{opacity:0;pointer-events:none;}
-.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--ink);border-radius:50%;animation:spin 0.7s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--white);
+    color: var(--charcoal);
+    line-height: 1.6;
+  }
 
-/* CONTAINER */
-.container{max-width:1100px;margin:0 auto;padding:40px 32px;}
+  .dev-notes-toggle {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: var(--charcoal);
+    color: var(--gold);
+    padding: 10px 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
 
-/* SECTION */
-.section{background:var(--surface);border-radius:var(--radius);padding:36px 40px;margin-bottom:24px;box-shadow:var(--shadow);border:1px solid var(--border);}
-.section-title{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
-.section-icon{width:30px;height:30px;background:var(--ink);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+  .dev-notes-toggle span.hint { color: var(--platinum); font-weight: 400; }
+  body.show-notes .dev-note { display: block; }
 
-/* FIELDS */
-.field{margin-bottom:18px;}
-.field label{display:block;font-size:14px;font-weight:700;color:var(--ink2);letter-spacing:0.3px;text-transform:uppercase;margin-bottom:9px;}
-.field input,.field select{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:18px;color:var(--ink);background:#fff;transition:border-color 0.2s;appearance:none;-webkit-appearance:none;outline:none;}
-.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:44px;cursor:pointer;}
-.field input:focus,.field select:focus{border-color:var(--ink);}
-.field input[readonly]{background:#f9f9f7;color:var(--ink2);cursor:default;}
-.required{color:var(--accent);margin-left:2px;}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-@media(max-width:640px){.field-row{grid-template-columns:1fr;}.container{padding:24px 16px;}.section{padding:24px 20px;}}
+  .dev-note {
+    display: none;
+    position: absolute;
+    background: var(--charcoal);
+    color: var(--white);
+    font-size: 11px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    max-width: 230px;
+    z-index: 500;
+    line-height: 1.5;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  }
 
-/* CATEGORY GROUP */
-.cat-group{margin-bottom:36px;}
-.cat-label{font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);padding:8px 0 10px;border-bottom:2px solid var(--border);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
-.cat-note{display:inline-flex;align-items:center;gap:5px;background:#fff8e6;border:1px solid #f0d580;color:#7a5c00;font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px;margin-left:8px;text-transform:none;letter-spacing:0;}
+  .dev-note::before {
+    content: "DEV NOTE";
+    display: block;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
 
-/* PRODUCT CARD */
-.prod-card{border:1.5px solid var(--border);border-radius:var(--radius-sm);margin-bottom:14px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;}
-.prod-card.has-qty{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink);}
+  .anchor { position: relative; display: inline-block; width: 100%; }
 
-.prod-header{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;background:#fff;transition:background 0.15s;user-select:none;}
-.prod-header:hover{background:#fafaf8;}
-.prod-card.has-qty .prod-header{background:var(--ink);color:#fff;}
+  .app-container {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--white);
+    position: relative;
+    padding: 20px;
+  }
 
-.prod-toggle{font-size:12px;color:var(--ink3);flex-shrink:0;transition:transform 0.2s;}
-.prod-card.has-qty .prod-toggle{color:rgba(255,255,255,0.5);}
-.prod-card.open .prod-toggle{transform:rotate(180deg);}
+  .state-tag {
+    display: inline-block;
+    background: var(--charcoal);
+    color: var(--gold);
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
 
-.prod-info{flex:1;min-width:0;}
-.prod-name{font-size:18px;font-weight:600;line-height:1.4;}
-.prod-meta{font-size:14px;color:var(--ink3);margin-top:3px;}
-.prod-card.has-qty .prod-meta{color:rgba(255,255,255,0.5);}
+  .hero {
+    width: 100%;
+    height: 200px;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(180deg, var(--charcoal) 0%, #1f2b23 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
 
-.prod-summary{font-size:17px;font-weight:700;color:var(--accent);flex-shrink:0;white-space:nowrap;}
-.prod-card.has-qty .prod-summary{color:var(--accent2);}
+  .hero-decoration { position: absolute; border-radius: 50%; background: var(--gold); }
+  .hero .eyebrow { color: var(--gold); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .hero h1 { color: var(--white); font-size: 22px; font-weight: 500; }
+  .hero p { color: var(--platinum); font-size: 12px; margin-top: 8px; }
 
-/* PRODUCT BODY */
-.prod-body{display:none;border-top:1px solid var(--border);}
-.prod-card.open .prod-body{display:block;}
+  .section-label { font-size: 15px; font-weight: 600; margin-bottom: 14px; }
 
-/* CONDITION TABS */
-.cond-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);background:#f7f6f2;overflow-x:auto;}
-.cond-tab{padding:13px 20px;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap;color:var(--ink3);border-bottom:2px solid transparent;transition:all 0.15s;flex-shrink:0;}
-.cond-tab:hover{color:var(--ink);}
-.cond-tab.active{color:var(--ink);border-bottom-color:var(--ink);background:#fff;}
-.cond-tab .tab-count{display:inline-block;background:var(--border);color:var(--ink2);font-size:10px;font-weight:700;padding:1px 6px;border-radius:100px;margin-left:5px;}
-.cond-tab.active .tab-count{background:var(--ink);color:#fff;}
+  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 4px; }
 
-/* CONDITION PANEL */
-.cond-panel{display:none;padding:20px 24px;}
-.cond-panel.active{display:block;}
+  .product-card {
+    cursor: pointer;
+    background: var(--white);
+    border: 1px solid var(--platinum);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
 
-.cond-badge{display:inline-flex;align-items:center;gap:5px;font-size:14px;font-weight:700;padding:6px 14px;border-radius:6px;margin-bottom:16px;}
-.badge-new{background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9;}
-.badge-open{background:#fff3e0;color:#e65100;border:1px solid #ffe0b2;}
-.badge-opennosac{background:#fce4ec;color:#880e4f;border:1px solid #f8bbd0;}
+  .product-card:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .product-card.selected { border-color: var(--gold); border-width: 2px; background: var(--sand); }
 
-/* VARIANT ROWS */
-.variant-row{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--border);}
-.variant-row:last-child{border-bottom:none;}
-.variant-info{flex:1;min-width:0;}
-.variant-color{font-size:17px;font-weight:600;color:var(--ink);}
-.variant-stock-label{font-size:14px;color:var(--ink3);margin-top:3px;}
-.variant-price-tag{font-size:17px;font-weight:700;color:var(--ink2);white-space:nowrap;flex-shrink:0;}
-.qty-wrap{display:flex;align-items:center;gap:6px;flex-shrink:0;}
-.qty-btn{width:38px;height:38px;border:1.5px solid var(--border);border-radius:7px;background:#fff;cursor:pointer;font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all 0.15s;color:var(--ink);flex-shrink:0;}
-.qty-btn:hover:not(:disabled){border-color:var(--ink);background:var(--ink);color:#fff;}
-.qty-btn:disabled{opacity:0.3;cursor:not-allowed;}
-.qty-input{width:56px;text-align:center;padding:9px 2px;border:1.5px solid var(--border);border-radius:7px;font-size:18px;font-family:'DM Sans',sans-serif;background:#fff;outline:none;transition:border-color 0.2s;}
-.qty-input:focus{border-color:var(--ink);}
+  .product-card-image { height: 90px; background: var(--sand); display: flex; align-items: center; justify-content: center; }
+  .product-card.selected .product-card-image { background: var(--white); }
+  .product-card-image .placeholder-box { width: 40px; height: 40px; border-radius: 8px; background: var(--platinum); opacity: 0.6; }
 
-/* TOTAL BAR */
-.total-bar{background:var(--ink);color:#fff;border-radius:var(--radius);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;box-shadow:var(--shadow-lg);}
-.total-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:4px;}
-.total-amount{font-family:'DM Serif Display',serif;font-size:44px;color:var(--accent2);}
+  .product-card-info { padding: 10px; }
+  .product-card-info .name { font-weight: 600; font-size: 13px; }
+  .product-card-info .desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
-/* QR */
-.qr-section{text-align:center;}
-.qr-img{width:100%;max-width:360px;border-radius:var(--radius-sm);box-shadow:var(--shadow);}
-.qr-note{font-size:15px;color:var(--ink2);line-height:1.7;margin-top:14px;background:#fafaf8;border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px 15px;text-align:left;}
+  /* ===== General FAQ — ALWAYS VISIBLE, independent of product selection ===== */
+  .general-faq-section {
+    background: var(--sand);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    margin-top: 28px;
+    margin-bottom: 28px;
+  }
+  .general-faq-section .subsection-label { display: flex; align-items: center; justify-content: space-between; }
+  .general-faq-badge {
+    background: var(--charcoal); color: var(--white); font-size: 9px; padding: 2px 8px;
+    border-radius: 10px; text-transform: none; letter-spacing: 0; font-weight: 600;
+  }
+  .general-faq-section .faq-item { background: var(--white); }
+  .general-faq-section .faq-list { display: flex; flex-direction: column; gap: 8px; }
 
-/* FILE */
-.file-drop{border:2px dashed var(--border);border-radius:var(--radius-sm);padding:28px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;position:relative;}
-.file-drop:hover{border-color:var(--ink);background:#fafaf8;}
-.file-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.file-drop-icon{font-size:28px;margin-bottom:6px;}
-.file-drop-text{font-size:16px;color:var(--ink2);}
-.file-drop-sub{font-size:11px;color:var(--ink3);margin-top:3px;}
-.file-preview{margin-top:12px;display:none;}
-.file-preview img{max-width:100%;max-height:180px;border-radius:8px;box-shadow:var(--shadow);}
+  /* ===== Product-specific content panel — only appears after clicking a product ===== */
+  .content-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .content-panel.open { max-height: 5000px; margin-top: 24px; }
 
-/* SUBMIT */
-.btn-submit{width:100%;padding:18px;background:var(--ink);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:19px;font-weight:600;cursor:pointer;transition:opacity 0.2s,transform 0.1s;}
-.btn-submit:hover:not(:disabled){opacity:0.88;transform:translateY(-1px);}
-.btn-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+  .panel-inner { border-top: 1px solid var(--platinum); padding-top: 20px; }
 
-/* SUCCESS / CLOSED */
-#success-screen,#closed-screen{display:none;text-align:center;padding:80px 20px;}
-.big-icon{font-size:60px;margin-bottom:20px;}
-.big-title{font-family:'DM Serif Display',serif;font-size:28px;margin-bottom:10px;}
-.big-sub{font-size:14px;color:var(--ink2);line-height:1.7;}
+  .product-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px; background: var(--sand); border-radius: var(--radius-lg); margin-bottom: 22px;
+  }
 
-@media(max-width:560px){
-  .cond-tab{padding:9px 12px;font-size:11px;}
-  .variant-row{flex-wrap:wrap;gap:8px;}
-  .variant-price-tag{order:3;}
-}
+  .product-header-thumb {
+    width: 48px; height: 48px; border-radius: var(--radius-sm);
+    background: var(--white); border: 1px solid var(--platinum); flex-shrink: 0;
+  }
+
+  .product-header h2 { font-size: 16px; font-weight: 600; }
+  .product-header .sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  .subsection-label {
+    font-size: 11px; color: var(--gold); text-transform: uppercase;
+    letter-spacing: 0.8px; font-weight: 600; margin-bottom: 10px;
+  }
+
+  .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 24px; }
+
+  .video-card {
+    cursor: pointer; background: var(--white); border: 1px solid var(--platinum);
+    border-radius: var(--radius-md); padding: 8px; transition: border-color 0.2s;
+  }
+  .video-card:hover { border-color: var(--gold); }
+
+  .video-thumb {
+    height: 56px; background: var(--charcoal); border-radius: 6px; margin-bottom: 6px;
+    display: flex; align-items: center; justify-content: center; color: var(--gold);
+    font-size: 14px; position: relative;
+  }
+
+  .video-duration {
+    position: absolute; bottom: 4px; right: 4px; background: rgba(0,0,0,0.6);
+    color: white; font-size: 9px; padding: 1px 4px; border-radius: 3px;
+  }
+
+  .video-title { font-size: 11px; font-weight: 500; }
+
+  .manual-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+
+  .manual-item {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--white); border: 1px solid var(--platinum); border-radius: var(--radius-md);
+    padding: 12px 14px; cursor: pointer; transition: all 0.15s;
+  }
+  .manual-item:hover { border-color: var(--gold); background: #fffdf7; }
+  .manual-item .label { font-size: 13px; }
+  .manual-item .meta { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  .download-icon { color: var(--charcoal); font-size: 16px; transition: transform 0.2s; }
+  .manual-item:hover .download-icon { transform: translateY(2px); color: var(--gold); }
+
+  .faq-trigger {
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; background: var(--white); border: 1.5px solid var(--platinum);
+    border-radius: var(--radius-md); padding: 16px; transition: all 0.2s;
+  }
+  .faq-trigger:hover { border-color: var(--gold); background: #fffdf7; }
+  .faq-trigger-left { display: flex; align-items: center; gap: 10px; }
+  .faq-trigger-icon {
+    width: 32px; height: 32px; border-radius: 8px; background: var(--sand);
+    display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0;
+  }
+  .faq-trigger-text .title { font-size: 13px; font-weight: 600; }
+  .faq-trigger-text .sub { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .faq-trigger-arrow { color: var(--gold); font-size: 16px; transition: transform 0.2s; }
+  .faq-trigger:hover .faq-trigger-arrow { transform: translateX(3px); }
+
+  .faq-item {
+    background: var(--white); border: 1px solid var(--platinum); border-radius: var(--radius-md);
+    padding: 12px 14px; cursor: pointer;
+  }
+  .faq-question { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 500; }
+  .faq-chevron { transition: transform 0.25s ease; color: var(--gold); font-size: 12px; flex-shrink: 0; margin-left: 10px; }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.25s ease, margin-top 0.25s ease; font-size: 12px; color: var(--text-muted); }
+  .faq-item.open .faq-answer { max-height: 200px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--sand); }
+
+  .faq-count-badge { font-size: 10px; color: var(--text-muted); font-weight: 400; text-transform: none; letter-spacing: 0; margin-left: 6px; }
+
+  /* ============ SIDE DRAWER ============ */
+  .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(22, 33, 28, 0.45); z-index: 800; }
+  .drawer-overlay.open { display: block; }
+
+  .side-drawer {
+    position: fixed; top: 0; right: -420px; width: 400px; max-width: 90vw; height: 100vh;
+    background: var(--white); z-index: 900; box-shadow: -8px 0 32px rgba(0,0,0,0.15);
+    transition: right 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+    display: flex; flex-direction: column;
+  }
+  .side-drawer.open { right: 0; }
+
+  .drawer-header {
+    background: var(--charcoal); color: var(--white); padding: 20px;
+    display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+  }
+  .drawer-header-title { font-size: 15px; font-weight: 600; }
+  .drawer-header-sub { font-size: 11px; color: var(--gold); margin-top: 2px; }
+
+  .drawer-close {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: rgba(255,255,255,0.1); border: none; color: var(--white);
+    font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .drawer-close:hover { background: rgba(255,255,255,0.2); }
+
+  .drawer-body { flex: 1; overflow-y: auto; padding: 20px; }
+  .drawer-faq-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .drawer-faq-item { background: var(--sand); border-radius: var(--radius-md); padding: 14px 16px; }
+  .drawer-faq-item .q { font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; display: flex; gap: 8px; }
+  .drawer-faq-item .q-num { color: var(--gold); flex-shrink: 0; }
+  .drawer-faq-item .a { font-size: 12px; color: var(--text-muted); padding-left: 22px; }
+
+  @media (max-width: 640px) {
+    .side-drawer {
+      right: auto; top: auto; bottom: -100vh; left: 0; width: 100%; max-width: 100%;
+      height: 85vh; border-radius: 20px 20px 0 0;
+      transition: bottom 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .side-drawer.open { bottom: 0; right: 0; }
+  }
 </style>
 </head>
 <body>
 
-<div id="loading-overlay">
-  <div class="spinner"></div>
-  <div style="font-size:13px;color:var(--ink2);">Đang tải thông tin sản phẩm…</div>
+<div class="dev-notes-toggle" onclick="document.body.classList.toggle('show-notes')">
+  <span>🔧 Dev annotations</span>
+  <span class="hint">Click to toggle notes on/off</span>
 </div>
 
-<div class="page-header">
-  <img src="https://raw.githubusercontent.com/haiaunt195-prog/INNO-order/main/logo-inno-black.png" class="header-logo" alt="INNO"/>
-  <div class="header-tag">Nội bộ</div>
-  <h1 class="header-title">Ưu Đãi Thanh Lý</h1>
-  <p class="header-sub">Dành riêng cho nhân viên INNO Group · Đến hết 30/06/2026</p>
+<div class="app-container">
+
+  <div class="state-tag">SCREEN: Home — Hero → Products → [Product panel] → General FAQ (always visible)</div>
+
+  <div class="anchor">
+    <div class="hero">
+      <div class="hero-decoration" style="width:64px;height:64px;top:20px;right:30px;opacity:0.15;"></div>
+      <div class="hero-decoration" style="width:36px;height:36px;bottom:16px;left:36px;opacity:0.1;"></div>
+      <p class="eyebrow">UWANT Vietnam</p>
+      <h1>Trung tâm hỗ trợ</h1>
+      <p>Video · Tài liệu · Câu hỏi thường gặp</p>
+    </div>
+    <div class="dev-note" style="top:10px;left:10px;">Hero: full-width banner image or gradient fallback. Static, no interaction.</div>
+  </div>
+
+  <p class="section-label">Chọn sản phẩm của bạn</p>
+
+  <div class="anchor">
+    <div class="product-grid">
+      <div class="product-card" id="card-S600" onclick="selectProduct('S600')">
+        <div class="product-card-image"><div class="placeholder-box"></div></div>
+        <div class="product-card-info"><div class="name">S600</div><div class="desc">Robot hút bụi</div></div>
+      </div>
+      <div class="product-card" id="card-DX800" onclick="selectProduct('DX800')">
+        <div class="product-card-image"><div class="placeholder-box"></div></div>
+        <div class="product-card-info"><div class="name">DX800</div><div class="desc">Hút nước nóng</div></div>
+      </div>
+      <div class="product-card" id="card-Y100" onclick="selectProduct('Y100')">
+        <div class="product-card-image"><div class="placeholder-box"></div></div>
+        <div class="product-card-info"><div class="name">Y100</div><div class="desc">Lau sàn hơi nước</div></div>
+      </div>
+    </div>
+    <div class="dev-note" style="top:0;right:-10px;">Click card → expands product content panel below (video/manual/FAQ trigger). Doesn't affect the General FAQ block — that one's independent, see note below.</div>
+  </div>
+
+  <div class="content-panel" id="content-panel">
+    <div class="panel-inner">
+
+      <div class="product-header">
+        <div class="product-header-thumb"></div>
+        <div><h2 id="product-name">S600</h2><p class="sub">Tất cả tài liệu hỗ trợ</p></div>
+      </div>
+
+      <p class="subsection-label">▶ Video hướng dẫn</p>
+      <div class="video-grid" id="video-grid"></div>
+
+      <p class="subsection-label">⬇ Manual tải về</p>
+      <div class="manual-list" id="manual-list"></div>
+
+      <div class="anchor">
+        <div class="faq-trigger" onclick="openDrawer()">
+          <div class="faq-trigger-left">
+            <div class="faq-trigger-icon">❓</div>
+            <div class="faq-trigger-text">
+              <div class="title" id="faq-trigger-title">Câu hỏi về S600</div>
+              <div class="sub">Xem 5 câu hỏi thường gặp</div>
+            </div>
+          </div>
+          <span class="faq-trigger-arrow">→</span>
+        </div>
+        <div class="dev-note" style="top:-10px;right:0;">Opens side drawer showing all 5 product-specific FAQs at once. Re-renders based on selected product.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== GENERAL FAQ — always rendered, visible from first page load, sits at the bottom regardless of product selection ===== -->
+  <div class="anchor">
+    <div class="general-faq-section">
+      <p class="subsection-label">
+        <span>🛡️ Bảo hành & đổi trả <span class="faq-count-badge">(7 câu)</span></span>
+        <span class="general-faq-badge">Áp dụng mọi sản phẩm</span>
+      </p>
+      <div class="faq-list" id="general-faq-list"></div>
+    </div>
+    <div class="dev-note" style="top:-10px;right:0;">
+      General FAQ sits at the bottom of the page, below the product content panel. It renders immediately on page load — visible whether or not the user has clicked any product card, and stays in the same place whether the product panel above it is collapsed or expanded. Same 7 items regardless of product_id.
+    </div>
+  </div>
+
 </div>
 
-<div class="container">
-
-  <div id="closed-screen">
-    <div class="big-icon">🔒</div>
-    <div class="big-title">Chương trình đã kết thúc</div>
-    <p class="big-sub">Ưu đãi nội bộ đã kết thúc vào 23:59:59 ngày 30/06/2026.<br/>Cảm ơn bạn đã quan tâm!</p>
+<!-- ============ SIDE DRAWER ============ -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+<div class="side-drawer" id="side-drawer">
+  <div class="drawer-header">
+    <div>
+      <div class="drawer-header-title" id="drawer-title">Câu hỏi về S600</div>
+      <div class="drawer-header-sub">5 câu hỏi thường gặp</div>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
   </div>
-
-  <div id="success-screen">
-    <div class="big-icon">✅</div>
-    <div class="big-title">Đặt hàng thành công!</div>
-    <p class="big-sub">Đơn hàng của bạn đã được ghi nhận.<br/>Team sẽ liên hệ xác nhận trong thời gian sớm nhất.</p>
-  </div>
-
-  <div id="main-form">
-
-    <div class="section">
-      <div class="section-title"><div class="section-icon">①</div>Thông tin người mua</div>
-      <div class="field-row">
-        <div class="field"><label>Họ và tên <span class="required">*</span></label><input id="name" placeholder="Nguyễn Văn A"/></div>
-        <div class="field"><label>Mã nhân viên <span class="required">*</span></label><input id="employeeCode" placeholder="INNO2001"/></div>
-      </div>
-      <div class="field" style="display:none;">
-        <select id="company"><option value="INNO_Công Ty TNHH Thiết Bị Thông Minh INNO" selected>INNO Smart Living</option></select>
-      </div>
-      <div class="field">
-        <label>Địa chỉ nhận hàng <span class="required">*</span></label>
-        <input id="address" placeholder="Tên Công ty - Địa chỉ công ty"/>
-        <div style="font-size:13px;color:var(--ink3);margin-top:6px;line-height:1.6;">
-          💡 Ví dụ: <em>INNO Smart Living - 12 đường số 5 KDC Sadeco, phường Tân Phong, Quận 7 HCM</em>
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Email công ty <span class="required">*</span></label><input type="email" id="email" placeholder="example@company.com"/></div>
-        <div class="field"><label>Số điện thoại <span class="required">*</span></label><input id="phone" placeholder="0901234567"/></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-title"><div class="section-icon">②</div>Sản phẩm muốn mua <span class="required">*</span></div>
-      <div id="product-list"><div style="text-align:center;padding:40px;color:var(--ink3);font-size:14px;">Đang tải danh sách…</div></div>
-    </div>
-
-    <div class="total-bar">
-      <div>
-        <div class="total-label">Tổng tiền cần chuyển</div>
-        <div class="total-amount" id="total-display">0 ₫</div>
-      </div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.35);text-align:right;max-width:180px;line-height:1.6;">Giá đã bao gồm ưu đãi nội bộ</div>
-    </div>
-
-    <div class="section">
-      <div class="section-title"><div class="section-icon">③</div>Thanh toán</div>
-      <div class="qr-section">
-        <img src="https://raw.githubusercontent.com/haiaunt195-prog/INNO-order/main/QR%20code-inno%20noi%20bo.png" class="qr-img" alt="QR"/>
-        <div class="qr-note">📌 Vui lòng chuyển <strong>đúng số tiền</strong> và ghi note <strong>Mã NV</strong> hoặc <strong>Số điện thoại</strong> (ví dụ: <em>INNO2001</em> hoặc <em>0901234567</em>)</div>
-      </div>
-      <div class="field" style="margin-top:20px;">
-        <label>Upload bill chuyển khoản <span class="required">*</span></label>
-        <div class="file-drop">
-          <input type="file" id="paymentProof" accept="image/*" onchange="previewFile(this)"/>
-          <div class="file-drop-icon">📎</div>
-          <div class="file-drop-text">Chọn hoặc kéo thả ảnh bill vào đây</div>
-          <div class="file-drop-sub">JPG, PNG · Tối đa 10MB</div>
-        </div>
-        <div class="file-preview" id="file-preview"><img id="preview-img" src="" alt="preview"/></div>
-      </div>
-    </div>
-
-    <button class="btn-submit" id="submit-btn" onclick="submitOrder()">Gửi đơn hàng</button>
+  <div class="drawer-body">
+    <div class="drawer-faq-list" id="drawer-faq-list"></div>
   </div>
 </div>
 
 <script>
-const DEADLINE = new Date("2026-06-30T23:59:59+07:00");
-const CLOUDINARY_CLOUD_NAME = "ddpsybbri";
-const CLOUDINARY_UPLOAD_PRESET = "inno_upload";
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyWFhE5GZj2Pqc6LV1iEA3toK-QZfRLxzbl6NX8AKYQOhjDpiNArw58rNzi6AFdN6O-XA/exec";
-
-const ADDRESS_MAP = {
-  "OPPO_Công ty Cổ Phần Kỹ Thuật & Khoa Học Vĩnh Khang":"Tầng 16, tòa nhà UOA, 6 Tân Trào, P. Tân Mỹ, HCM",
-  "DJI_Công Ty TNHH Kỹ Thuật Tầm Nhìn Toàn Cầu":"Tầng 5, tòa nhà UOA, 6 Tân Trào, P. Tân Mỹ",
-  "[HCM] O-TECH_Công Ty TNHH Thiết Bị Thông Minh O-TECH HCM":"Tầng 7, toà nhà UOA, 6 Tân Trào, P. Tân Mỹ, HCM",
-  "[HN] O-TECH_Công Ty TNHH Thiết Bị Thông Minh O-TECH Hà Nội":"195 Khuất Duy Tiến, phường Đại Mổ, Hà Nội",
-  "EV Power_Công Ty TNHH EV Power":"Tầng 16- UOA số 6 Tân Trào, Tân Mỹ, TpHCM",
-  "NAM VIỆT_Công ty Cổ Phần Nam Việt Land":"Tầng 6, Tòa nhà UOA, số 6 Tân Trào, P. Tân Mỹ",
-  "Service":"27 Nguyễn Trung Trực, Bến Thành, Hồ Chí Minh",
-  "Call center":"Lô M, Chung cư Carillon - Số 1, Đường Trần Văn Danh, P.Tân Bình, TPHCM",
-  "Kho HCM":"Số 2639 Quốc Lộ 1, KP3, P. Đông Hưng Thuận, TP.HCM",
-  "Kho Hà Nội":"Kho PLS, Lô số 3 Cụm CN Lai Xá, Kim Chung, Hoài Đức, Hà Nội",
-  "Oway Sài Gòn":"816 Sư Vạn Hạnh, P. Hoà Hưng, TP. HCM",
-  "Oway Biên Hoà":"108 Xa Lộ Hà Nội, P. Tam Hiệp, Đồng Nai",
-  "Oway Quy Nhơn":"Tổ 9, Khu vực 8, P. Quy Nhơn Bắc, Gia Lai",
-  "Oway Đà Nẵng":"548-554 Nguyễn Hữu Thọ, P. Cẩm Lệ, Đà Nẵng",
-  "INNO_Công Ty TNHH Thiết Bị Thông Minh INNO":"Số 12 đường số 5, KCD Sadeco, Phường Tân Hưng"
+var productData = {
+  S600: {
+    videos: [
+      { title: 'Lắp ráp', duration: '3:24' },
+      { title: 'Chế độ thông minh', duration: '4:15' },
+      { title: 'Bảo trì', duration: '2:45' }
+    ],
+    manuals: [
+      { label: '📄 Hướng dẫn sử dụng (VI)', meta: 'PDF · 2.3 MB · 25 trang' },
+      { label: '📄 Thông số kỹ thuật', meta: 'PDF · 890 KB · 4 trang' }
+    ],
+    faqs: [
+      { q: 'Tại sao máy không hút nước?', a: 'Kiểm tra bể nước, bơm và ống dẫn. Vệ sinh theo hướng dẫn bảo trì.' },
+      { q: 'Cách vệ sinh chổi quét?', a: 'Tháo chổi, loại bỏ tóc và bụi bám, lắp lại đúng chiều mũi tên.' },
+      { q: 'Tiếng ồn bất thường khi vận hành?', a: 'Tiếng động cơ nhẹ là bình thường. Nếu có tiếng cọ xát kim loại, tắt máy và kiểm tra bánh xe/chổi.' },
+      { q: 'Cách vệ sinh bể nước?', a: 'Tháo bể ra, rửa bằng nước ấm, lau khô trước khi lắp lại để tránh mùi hôi.' },
+      { q: 'Máy không kết nối được với app?', a: 'Kiểm tra Wi-Fi 2.4GHz, khởi động lại router và máy, sau đó kết nối lại qua app.' }
+    ]
+  },
+  DX800: {
+    videos: [
+      { title: 'Lắp ráp bể nước', duration: '3:50' },
+      { title: 'Chế độ hơi nước', duration: '4:30' },
+      { title: 'Khử cáu cặn', duration: '3:10' }
+    ],
+    manuals: [
+      { label: '📄 Hướng dẫn sử dụng (VI)', meta: 'PDF · 2.8 MB · 30 trang' },
+      { label: '📄 Thông số kỹ thuật', meta: 'PDF · 950 KB · 5 trang' }
+    ],
+    faqs: [
+      { q: 'Tại sao máy không ra hơi nước?', a: 'Kiểm tra mực nước trong bể, đảm bảo đã cắm điện đủ 30 giây để làm nóng trước khi dùng.' },
+      { q: 'Nước không nóng lên?', a: 'Kiểm tra rơ-le nhiệt và đảm bảo bể nước không bị cạn giữa chừng.' },
+      { q: 'Cách vệ sinh chống cáu cặn?', a: 'Dùng dung dịch khử cặn chuyên dụng mỗi 2-4 tuần tùy độ cứng của nguồn nước.' },
+      { q: 'Dùng nước nóng có an toàn không?', a: 'Có, máy có van an toàn tự ngắt khi áp suất vượt ngưỡng. Không tự ý tháo van khi máy đang nóng.' },
+      { q: 'Vòi phun bị tắc phải làm sao?', a: 'Ngâm đầu vòi phun trong nước ấm 10-15 phút, dùng kim nhỏ thông lỗ phun nếu cần.' }
+    ]
+  },
+  Y100: {
+    videos: [
+      { title: 'Lắp khăn lau', duration: '2:30' },
+      { title: 'Chế độ hơi nước', duration: '3:45' },
+      { title: 'Vệ sinh sau dùng', duration: '2:15' }
+    ],
+    manuals: [
+      { label: '📄 Hướng dẫn sử dụng (VI)', meta: 'PDF · 2.1 MB · 22 trang' },
+      { label: '📄 Thông số kỹ thuật', meta: 'PDF · 780 KB · 4 trang' }
+    ],
+    faqs: [
+      { q: 'Hơi nước ra yếu hơn bình thường?', a: 'Kiểm tra mực nước trong bể và vệ sinh đầu phun hơi nếu bị đóng cặn.' },
+      { q: 'Cách thay hoặc vệ sinh khăn lau?', a: 'Giặt khăn bằng tay sau mỗi lần dùng, thay khăn mới sau khoảng 3-6 tháng sử dụng thường xuyên.' },
+      { q: 'Máy dùng được cho loại sàn nào?', a: 'Phù hợp sàn gạch men, sàn đá, sàn nhựa. Không khuyến khích dùng trên sàn gỗ tự nhiên chưa xử lý chống ẩm.' },
+      { q: 'Có mùi khét nhẹ khi mới dùng lần đầu?', a: 'Đây là hiện tượng bình thường do lớp bảo vệ linh kiện, mùi sẽ hết sau 2-3 lần sử dụng đầu.' },
+      { q: 'Máy tự tắt giữa chừng khi đang lau?', a: 'Có thể do cạn nước hoặc quá nhiệt. Để máy nguội 10 phút và kiểm tra lại mực nước trước khi dùng tiếp.' }
+    ]
+  }
 };
 
-// ── CONDITION TYPES ──
-// key dùng làm id trong DOM, label hiển thị, badge class
-const COND = {
-  new:   { label:"New seal",                     badgeLabel:"New seal (mới 100%)",                                                badge:"badge-new",       icon:"✦" },
-  open:  { label:"Đã khui seal",                 badgeLabel:"Đã khui seal – hàng trải nghiệm, hàng chụp ảnh PR, hàng trưng bày", badge:"badge-open",      icon:"◈" },
-  nosac: { label:"Đã khui seal – Thiếu dây sạc", badgeLabel:"Đã khui seal – Thiếu dây sạc (hàng trải nghiệm / PR / trưng bày)", badge:"badge-opennosac", icon:"◌" }
-};
-
-// ── CATALOG ──
-// Mỗi variant: { sku, color, conditions: { new:{qty,price}, open:{qty,price}, nosac:{qty,price} } }
-// qty=0 hoặc price=0 → không hiện condition đó
-const CATALOG = [
-  // ── ĐỒNG HỒ ──
-  
-  { category:"⌚ Đồng hồ thông minh", id:"g-venusq2",
-    name:"Garmin Venu Sq 2", note:null,
-    variants:[
-      { sku:"010-02701-81", color:"Trắng / Vàng Kem",
-        conditions:{ new:{qty:0,price:0}, open:{qty:0,price:1200000}, nosac:{qty:0,price:0} }},
-      { sku:"010-02701-80", color:"Xám Khói / Đá Phiến",
-        conditions:{ new:{qty:0,price:1500000}, open:{qty:0,price:1200000}, nosac:{qty:0,price:1000000} }}
-    ]},
-  
-
-  // ── MÁY SẤY TÓC ──
-  { category:"💨 Máy sấy tóc Laifen", id:"l-mini",
-    name:"Laifen Mini", note:null,
-    variants:[
-      { sku:"Mini_Hồng",  color:"Hồng",      conditions:{ new:{qty:0,price:0},   open:{qty:0,price:600000}, nosac:{qty:0,price:0} }},
-      { sku:"Mini_Trắng", color:"Trắng",     conditions:{ new:{qty:0,price:800000}, open:{qty:0,price:600000}, nosac:{qty:0,price:0} }},
-      { sku:"Mini_Xanh dương",color:"Xanh dương",conditions:{ new:{qty:0,price:800000},  open:{qty:0,price:600000}, nosac:{qty:0,price:0} }},
-      { sku:"Mini_Xanh lá",   color:"Xanh lá",   conditions:{ new:{qty:0,price:0},   open:{qty:0,price:600000}, nosac:{qty:0,price:0} }}
-    ]},
-  { category:"💨 Máy sấy tóc Laifen", id:"l-se",
-    name:"Laifen SE", note:null,
-    variants:[
-      { sku:"SE_Hồng",  color:"Hồng",  conditions:{ new:{qty:0,price:0}, open:{qty:0,price:700000}, nosac:{qty:0,price:0} }},
-      { sku:"SE_Tím",   color:"Tím",   conditions:{ new:{qty:0,price:0}, open:{qty:0,price:700000},  nosac:{qty:0,price:0} }},
-      { sku:"SE_Trắng", color:"Trắng", conditions:{ new:{qty:0,price:0}, open:{qty:0,price:700000},  nosac:{qty:0,price:0} }},
-      { sku:"SE_Xanh",  color:"Xanh",  conditions:{ new:{qty:0,price:0}, open:{qty:0,price:700000},  nosac:{qty:0,price:0} }}
-    ]},
-  { category:"💨 Máy sấy tóc Laifen", id:"l-se-lite",
-    name:"Laifen SE Lite", note:null,
-    variants:[
-      { sku:"SE-Lite_Nâu nhạt", color:"Nâu nhạt", conditions:{ new:{qty:0,price:700000},  open:{qty:0,price:500000}, nosac:{qty:0,price:0} }},
-      { sku:"SE-Lite_Tím", color:"Tím",      conditions:{ new:{qty:0,price:700000}, open:{qty:0,price:500000},nosac:{qty:0,price:0} }},
-      { sku:"SE-Lite_Xanh lá", color:"Xanh lá",  conditions:{ new:{qty:0,price:700000},  open:{qty:0,price:500000}, nosac:{qty:0,price:0} }}
-    ]},
-  { category:"💨 Máy sấy tóc Laifen", id:"l-swift",
-    name:"Laifen Swift", note:null,
-    variants:[
-      { sku:"Swift_Tím", color:"Tím", conditions:{ new:{qty:0,price:0}, open:{qty:0,price:500000}, nosac:{qty:0,price:0} }}
-    ]},
-  { category:"💨 Máy sấy tóc Laifen", id:"l-swift-p",
-    name:"Laifen Swift Premium", note:null,
-    variants:[
-      { sku:"Swift-Premium_Vàng hồng",  color:"Vàng hồng",  conditions:{ new:{qty:0,price:0}, open:{qty:0,price:900000}, nosac:{qty:0,price:0} }},
-      { sku:"Swift-Premium_Vàng trắng", color:"Vàng trắng", conditions:{ new:{qty:0,price:0}, open:{qty:0,price:900000}, nosac:{qty:0,price:0} }},
-      { sku:"Swift-Premium_Vàng xanh",  color:"Vàng xanh",  conditions:{ new:{qty:0,price:0}, open:{qty:0,price:900000}, nosac:{qty:0,price:0} }}
-    ]},
-
-  // ── LOA ALPHA WORKS ──
-  { category:"🔊 Loa Alpha Works", id:"aw-ride-blu",
-    name:"Alpha Works AW-RIDE", note:null,
-    variants:[
-      { sku:"D2", color:"Xanh da trời",
-        conditions:{ new:{qty:0,price:0}, open:{qty:0,price:200000}, nosac:{qty:0,price:0} }}
-    ]}
+var generalFaqs = [
+  { q: 'Sản phẩm được bảo hành trong bao lâu?', a: '24 tháng kể từ ngày mua, áp dụng cho lỗi từ nhà sản xuất.' },
+  { q: 'Tôi có thể đổi máy mới nếu vừa mua bị lỗi không?', a: 'Có, trong vòng 15 ngày đầu nếu phát hiện lỗi, được đổi máy mới miễn phí.' },
+  { q: 'Máy bị lỗi thì được sửa hay đổi máy?', a: 'Ưu tiên đổi máy mới (0-3 tháng đầu), đổi máy tân trang (3-6 tháng), sau 6 tháng sẽ sửa chữa.' },
+  { q: 'Phí vận chuyển khi gửi bảo hành ai chịu?', a: 'Trong thời hạn bảo hành, UWANT hỗ trợ vận chuyển 2 chiều miễn phí.' },
+  { q: 'Mua từ đại lý có được bảo hành không?', a: 'Có, miễn là mua từ đại lý ủy quyền chính hãng UWANT Việt Nam, giữ hóa đơn hoặc mã đơn hàng.' },
+  { q: 'Cần giấy tờ gì để yêu cầu bảo hành?', a: 'Hóa đơn mua hàng hoặc mã đơn hàng, kèm mô tả lỗi (ảnh/video nếu có).' },
+  { q: 'Bảo hành có bao gồm hư hỏng do người dùng không?', a: 'Không, lỗi do rơi vỡ, ngấm nước sai cách hoặc tự ý tháo máy sẽ không được bảo hành miễn phí.' }
 ];
 
-// ── INVENTORY from GSheet (keyed by sku+condition) ──
-// Format: "SKU__new", "SKU__open", "SKU__nosac"
-let inventory = {};
+var currentProduct = 'S600';
 
-// Build fallback from CATALOG
-function useFallbackInventory() {
-  inventory = {};
-  CATALOG.forEach(g => g.variants.forEach(v => {
-    Object.entries(v.conditions).forEach(([cond, d]) => {
-      inventory[v.sku + '__' + cond] = { qty: d.qty, price: d.price };
-    });
-  }));
+function renderVideos(list) {
+  return list.map(function(v) {
+    return '<div class="video-card" onclick="alert(\'Opens video player / modal\')">' +
+      '<div class="video-thumb">▶<span class="video-duration">' + v.duration + '</span></div>' +
+      '<div class="video-title">' + v.title + '</div></div>';
+  }).join('');
 }
 
-window.addEventListener('DOMContentLoaded', async () => {
-  if (new Date() > DEADLINE) {
-    document.getElementById('closed-screen').style.display = 'block';
-    document.getElementById('main-form').style.display = 'none';
-    hideLoading(); return;
-  }
-  useFallbackInventory();
-  renderProducts();
-  hideLoading();
-
-  try {
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), 8000);
-    const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getInventory", { signal: ctrl.signal, redirect: "follow" });
-    clearTimeout(t);
-    const data = await res.json();
-    if (data && data.inventory && Object.keys(data.inventory).length > 0) {
-      // Validate: có ít nhất 1 key có qty > 0
-      const hasStock = Object.values(data.inventory).some(v => {
-        if (typeof v === 'object') return v.qty > 0;
-        return Number(v) > 0;
-      });
-      if (hasStock) {
-        inventory = data.inventory;
-        renderProducts();
-      }
-    }
-  } catch(e) { console.warn("Live inventory fetch failed", e); }
-});
-
-function hideLoading() {
-  const el = document.getElementById('loading-overlay');
-  el.classList.add('hidden');
-  setTimeout(() => el.style.display = 'none', 400);
+function renderManuals(list) {
+  return list.map(function(m) {
+    return '<div class="manual-item" onclick="alert(\'Triggers file download\')">' +
+      '<div><div class="label">' + m.label + '</div><div class="meta">' + m.meta + '</div></div>' +
+      '<span class="download-icon">⬇</span></div>';
+  }).join('');
 }
 
-// ── RENDER ──
-function renderProducts() {
-  const container = document.getElementById('product-list');
-  container.innerHTML = '';
-
-  const cats = {};
-  CATALOG.forEach(g => { if (!cats[g.category]) cats[g.category] = []; cats[g.category].push(g); });
-
-  Object.entries(cats).forEach(([cat, groups]) => {
-    const anyStock = groups.some(g => g.variants.some(v =>
-      Object.keys(COND).some(c => getQty(v.sku, c) > 0)
-    ));
-    if (!anyStock) return;
-
-    const isBanChai = cat.includes('Bàn chải');
-
-    const catDiv = document.createElement('div');
-    catDiv.className = 'cat-group';
-
-    let catLabelHTML = `<div class="cat-label">${cat}`;
-    if (isBanChai) {
-      catLabelHTML += `<span class="cat-note">🛡️ Đổi trả trong 07 ngày từ ngày nhận hàng</span>`;
-    }
-    catLabelHTML += `</div>`;
-    catDiv.innerHTML = catLabelHTML;
-
-    groups.forEach(g => {
-      const hasAnyStock = g.variants.some(v => Object.keys(COND).some(c => getQty(v.sku, c) > 0));
-      if (!hasAnyStock) return;
-
-      // Which conditions have any stock across all variants?
-      const activeConds = Object.keys(COND).filter(c =>
-        g.variants.some(v => getQty(v.sku, c) > 0)
-      );
-
-      // Total qty across all variants+conditions for summary
-      const card = document.createElement('div');
-      card.className = 'prod-card';
-      card.id = 'card-' + g.id;
-
-      // Build tab HTML
-      const tabsHTML = activeConds.map((c, i) => {
-        const totalQty = g.variants.reduce((s, v) => s + getQty(v.sku, c), 0);
-        return `<div class="cond-tab ${i===0?'active':''}" onclick="switchTab('${g.id}','${c}')" id="tab-${g.id}-${c}">
-          ${COND[c].label} <span class="tab-count">${totalQty}</span>
-        </div>`;
-      }).join('');
-
-      // Build panels
-      const panelsHTML = activeConds.map((c, i) => {
-        const variantsHTML = g.variants.map(v => {
-          const qty = getQty(v.sku, c);
-          const price = getPrice(v.sku, c);
-          if (qty <= 0) return '';
-          return `
-            <div class="variant-row">
-              <div class="variant-info">
-                <div class="variant-color">${v.color}</div>
-                <div class="variant-stock-label">📦 Còn ${qty} cái</div>
-              </div>
-              <div class="variant-price-tag">${price.toLocaleString('vi-VN')}₫</div>
-              <div class="qty-wrap">
-                <button class="qty-btn" onclick="changeQty('${v.sku}__${c}',-1,${qty})">−</button>
-                <input class="qty-input" type="number" id="qty-${v.sku}__${c}" min="0" max="${qty}" value="0"
-                  oninput="clampAndUpdate(this,${qty})"/>
-                <button class="qty-btn" onclick="changeQty('${v.sku}__${c}',1,${qty})">+</button>
-              </div>
-            </div>`;
-        }).join('');
-
-        return `<div class="cond-panel ${i===0?'active':''}" id="panel-${g.id}-${c}">
-          <div class="cond-badge ${COND[c].badge}">${COND[c].icon} ${COND[c].badgeLabel}</div>
-          ${variantsHTML}
-        </div>`;
-      }).join('');
-
-      card.innerHTML = `
-        <div class="prod-header" onclick="toggleCard('${g.id}')">
-          <div class="prod-info">
-            <div class="prod-name">${g.name}</div>
-            <div class="prod-meta">${activeConds.length} loại · ${activeConds.map(c => COND[c].label).join(' / ')}</div>
-          </div>
-          <div class="prod-summary" id="summary-${g.id}">–</div>
-          <div class="prod-toggle">▾</div>
-        </div>
-        <div class="prod-body">
-          <div class="cond-tabs">${tabsHTML}</div>
-          ${panelsHTML}
-        </div>`;
-
-      catDiv.appendChild(card);
-    });
-
-    container.appendChild(catDiv);
-  });
+function renderFaqAccordion(list) {
+  return list.map(function(f) {
+    return '<div class="faq-item" onclick="this.classList.toggle(\'open\')">' +
+      '<div class="faq-question"><span>' + f.q + '</span><span class="faq-chevron">▾</span></div>' +
+      '<div class="faq-answer">' + f.a + '</div></div>';
+  }).join('');
 }
 
-function getQty(sku, cond) {
-  const k = sku + '__' + cond;
-  if (inventory[k] !== undefined) {
-    return typeof inventory[k] === 'object' ? inventory[k].qty : Number(inventory[k]);
-  }
-  // Fallback to CATALOG
-  for (const g of CATALOG) {
-    for (const v of g.variants) {
-      if (v.sku === sku && v.conditions[cond]) return v.conditions[cond].qty;
-    }
-  }
-  return 0;
+function renderDrawerFaqs(list) {
+  return list.map(function(f, i) {
+    return '<div class="drawer-faq-item">' +
+      '<div class="q"><span class="q-num">' + (i + 1) + '.</span><span>' + f.q + '</span></div>' +
+      '<div class="a">' + f.a + '</div></div>';
+  }).join('');
 }
 
-function getPrice(sku, cond) {
-  const k = sku + '__' + cond;
-  if (inventory[k] !== undefined && typeof inventory[k] === 'object') return inventory[k].price;
-  for (const g of CATALOG) {
-    for (const v of g.variants) {
-      if (v.sku === sku && v.conditions[cond]) return v.conditions[cond].price;
-    }
-  }
-  return 0;
+// General FAQ renders immediately on page load — independent of product selection
+document.getElementById('general-faq-list').innerHTML = renderFaqAccordion(generalFaqs);
+
+function selectProduct(name) {
+  document.querySelectorAll('.product-card').forEach(function(c) { c.classList.remove('selected'); });
+  document.getElementById('card-' + name).classList.add('selected');
+
+  currentProduct = name;
+  var data = productData[name];
+
+  document.getElementById('product-name').textContent = name;
+  document.getElementById('faq-trigger-title').textContent = 'Câu hỏi về ' + name;
+  document.getElementById('video-grid').innerHTML = renderVideos(data.videos);
+  document.getElementById('manual-list').innerHTML = renderManuals(data.manuals);
+
+  var panel = document.getElementById('content-panel');
+  panel.classList.add('open');
+
+  setTimeout(function() {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
 }
 
-function switchTab(gid, cond) {
-  // Deactivate all tabs/panels for this group
-  document.querySelectorAll(`[id^="tab-${gid}-"]`).forEach(el => el.classList.remove('active'));
-  document.querySelectorAll(`[id^="panel-${gid}-"]`).forEach(el => el.classList.remove('active'));
-  document.getElementById(`tab-${gid}-${cond}`).classList.add('active');
-  document.getElementById(`panel-${gid}-${cond}`).classList.add('active');
+function openDrawer() {
+  var data = productData[currentProduct];
+  document.getElementById('drawer-title').textContent = 'Câu hỏi về ' + currentProduct;
+  document.getElementById('drawer-faq-list').innerHTML = renderDrawerFaqs(data.faqs);
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById('side-drawer').classList.add('open');
 }
 
-function toggleCard(gid) {
-  const card = document.getElementById('card-' + gid);
-  card.classList.toggle('open');
-}
-
-function changeQty(key, delta, max) {
-  const input = document.getElementById('qty-' + key);
-  if (!input) return;
-  let val = Math.max(0, Math.min(max, parseInt(input.value || 0) + delta));
-  input.value = val;
-  calculateTotal();
-  updateCardSummary(key);
-}
-
-function clampAndUpdate(input, max) {
-  let v = parseInt(input.value);
-  if (isNaN(v) || v < 0) input.value = 0;
-  else if (v > max) input.value = max;
-  calculateTotal();
-  updateCardSummary(input.id.replace('qty-', ''));
-}
-
-function updateCardSummary(key) {
-  // Find which group this key belongs to
-  const [sku, cond] = key.split('__');
-  for (const g of CATALOG) {
-    const match = g.variants.find(v => v.sku === sku);
-    if (!match) continue;
-    // Sum all qty*price for this group
-    let total = 0, count = 0;
-    g.variants.forEach(v => {
-      Object.keys(COND).forEach(c => {
-        const el = document.getElementById(`qty-${v.sku}__${c}`);
-        if (!el) return;
-        const q = parseInt(el.value || 0);
-        if (q > 0) { total += q * getPrice(v.sku, c); count += q; }
-      });
-    });
-    const summaryEl = document.getElementById('summary-' + g.id);
-    const card = document.getElementById('card-' + g.id);
-    if (summaryEl) summaryEl.textContent = count > 0 ? total.toLocaleString('vi-VN') + '₫' : '–';
-    if (card) card.classList.toggle('has-qty', count > 0);
-    break;
-  }
-}
-
-function calculateTotal() {
-  let total = 0;
-  document.querySelectorAll('.qty-input').forEach(el => {
-    const q = parseInt(el.value || 0);
-    if (q <= 0) return;
-    const [sku, cond] = el.id.replace('qty-','').split('__');
-    total += q * getPrice(sku, cond);
-  });
-  document.getElementById('total-display').textContent = total.toLocaleString('vi-VN') + ' ₫';
-}
-
-function updateAddress() {
-  document.getElementById('address').value = ADDRESS_MAP[document.getElementById('company').value] || '';
-}
-
-function previewFile(input) {
-  const file = input.files[0]; if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => { document.getElementById('preview-img').src = e.target.result; document.getElementById('file-preview').style.display = 'block'; };
-  reader.readAsDataURL(file);
-}
-
-async function compressImage(file) {
-  return new Promise(resolve => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = e => {
-      const img = new Image(); img.src = e.target.result;
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const scale = Math.min(1, 1200 / img.width);
-        canvas.width = img.width * scale; canvas.height = img.height * scale;
-        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob(resolve, 'image/jpeg', 0.75);
-      };
-    };
-  });
-}
-
-async function uploadToCloudinary(file) {
-  const blob = await compressImage(file);
-  const fd = new FormData();
-  fd.append('file', blob, 'bill.jpg');
-  fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, { method:'POST', body:fd });
-  const data = await res.json();
-  if (!data.secure_url) throw new Error('Upload ảnh thất bại');
-  return data.secure_url;
-}
-
-async function submitViaGet(data) {
-  // Gửi lên Apps Script qua GET
-  const url = GOOGLE_SCRIPT_URL + '?data=' + encodeURIComponent(JSON.stringify(data));
-  try {
-    const res = await fetch(url, { method: 'GET', redirect: 'follow' });
-    const text = await res.text();
-    if (!text.trim().startsWith('{')) throw new Error('NOT_JSON');
-    const result = JSON.parse(text);
-    if (result.error) throw new Error(result.error);
-    return result;
-  } catch(e) {
-    if (e.message === 'NOT_JSON' || e.name === 'TypeError') {
-      await fetch(url, { method: 'GET', mode: 'no-cors' });
-      return { success: true };
-    }
-    throw e;
-  }
-}
-
-async function submitOrder() {
-  const btn = document.getElementById('submit-btn');
-  const fullName = document.getElementById('name').value.trim();
-  const company  = document.getElementById('company').value.trim();
-  const address  = document.getElementById('address').value.trim();
-  const email    = document.getElementById('email').value.trim();
-  const employeeCode = document.getElementById('employeeCode').value.trim();
-  const phone    = document.getElementById('phone').value.trim();
-
-  if (!fullName||!company||!address||!email||!employeeCode||!phone) {
-    alert('Vui lòng nhập đầy đủ thông tin cá nhân.'); return;
-  }
-
-  const items = [];
-  let hasError = false;
-
-  document.querySelectorAll('.qty-input').forEach(el => {
-    const q = parseInt(el.value || 0);
-    if (q <= 0) return;
-    const [sku, cond] = el.id.replace('qty-','').split('__');
-    const maxQty = getQty(sku, cond);
-    if (q > maxQty) {
-      alert(`Số lượng vượt tồn kho (còn ${maxQty} cái)`);
-      hasError = true; return;
-    }
-    // Find product name
-    let productName = sku, colorName = '', originalSku = sku;
-    for (const g of CATALOG) {
-      const v = g.variants.find(v => v.sku === sku);
-      if (v) { productName = g.name; colorName = v.color; break; }
-    }
-    items.push({
-      sku: originalSku, product: productName, color: colorName,
-      condition: cond,
-      qty: q, price: getPrice(sku, cond), subtotal: q * getPrice(sku, cond)
-    });
-  });
-
-  if (hasError) return;
-  if (items.length === 0) { alert('Vui lòng chọn ít nhất một sản phẩm.'); return; }
-
-  const file = document.getElementById('paymentProof').files[0];
-  if (!file) { alert('Vui lòng upload bill chuyển khoản.'); return; }
-
-  const totalAmount = items.reduce((s, i) => s + i.subtotal, 0);
-
-  try {
-    btn.disabled = true; btn.textContent = 'Đang upload bill…';
-    const paymentImage = await uploadToCloudinary(file);
-    btn.textContent = 'Đang gửi đơn hàng…';
-
-    // Gửi email backup TRƯỚC — đảm bảo luôn có record
-    try {
-      const itemsText = items.map(i =>
-        `${i.product} | ${i.color} | ${COND[i.condition]?.label || i.condition} | SL: ${i.qty} | ${i.price.toLocaleString('vi-VN')}đ`
-      ).join('\n');
-
-      await emailjs.send('service_m7vhscf', 'template_lgr2pou', {
-        from_name: fullName,
-        employee_code: employeeCode,
-        phone: phone,
-        reply_to: email,
-        address: address,
-        total: totalAmount.toLocaleString('vi-VN') + 'đ',
-        bill_url: paymentImage,
-        items: itemsText,
-        timestamp: new Date().toLocaleString('vi-VN', {timeZone:'Asia/Ho_Chi_Minh'})
-      });
-      console.log('Email backup sent');
-    } catch(emailErr) {
-      console.warn('Email backup failed:', emailErr);
-      // Không throw — vẫn tiếp tục gửi lên Apps Script
-    }
-
-    await submitViaGet({
-      action:'submitOrder', fullName, company, address, email,
-      employeeCode, phone, totalAmount, paymentImage, items
-    });
-    document.getElementById('main-form').style.display = 'none';
-    document.getElementById('success-screen').style.display = 'block';
-    window.scrollTo({ top:0, behavior:'smooth' });
-  } catch(err) {
-    console.error(err);
-    alert(err.message || 'Có lỗi xảy ra, vui lòng thử lại.');
-    btn.disabled = false; btn.textContent = 'Gửi đơn hàng';
-  }
+function closeDrawer() {
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.getElementById('side-drawer').classList.remove('open');
 }
 </script>
+
 </body>
 </html>
